@@ -1,0 +1,35 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  margin: 0 auto;
+  border: 1px dotted yellow;
+}
+
+.footer__text {
+  font-weight: 400;
+  color: #8b8b8b;
+  margin: 79px auto 20px;
+}
+
+.footer__menu {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 70px;
+  border-top: 1px solid #424242;
+  padding: 20px 0;
+}
+
+.footer__date {
+  color: #ffffff;
+  margin: 0;
+}
+
+.footer__link {
+  color: #ffffff;
+  margin-right: 20px;
+}
+
+.footer__link:nth-of-type(3) {
+  margin: 0px;
+}
