@@ -4,8 +4,8 @@ import "./AboutProject.css";
 function AboutProject(props) {
   return (
     <section class="about">
-      <div className="about__text-frame">
-        <h3 className="about__header">О проекте</h3>
+      <div className="section__text-frame">
+        <h3 className="section__header">О проекте</h3>
       </div>
       <div className="about__content table">
         <p className="table__header">Дипломный проект включал 5 этапов</p>

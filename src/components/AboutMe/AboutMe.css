@@ -1,0 +1,53 @@
+.student {
+  padding: 110px 70px 125px;
+}
+
+.student__page {
+  padding-top: 66px;
+  display: grid;
+  grid-template-columns: 600px 1fr;
+  grid-template-rows: 4 auto;
+  grid-template-areas:
+    "name image"
+    "profession image"
+    "about image"
+    "links image";
+}
+
+.student__name {
+  grid-area: name;
+  font-size: 50px;
+  line-height: 1.16;
+  margin: 0;
+}
+
+.student__brief {
+  grid-area: profession;
+  font-size: 18px;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.student__info {
+  grid-area: about;
+  font-size: 14px;
+  line-height: 1.57;
+}
+
+.student__links {
+  grid-area: links;
+  align-self: flex-end;
+}
+
+.student__link {
+  text-decoration: none;
+  margin-right: 20px;
+  color: white;
+  font-size: 14px;
+}
+
+.student__image {
+  grid-row-start: 1;
+  grid-row-end: 5;
+  justify-self: end;
+}

@@ -1,0 +1,37 @@
+.techs {
+  background-color: #272727;
+  padding: 100px 70px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tech__header {
+  font-size: 50px;
+  line-height: 1.16;
+  margin: 90px auto 0;
+}
+
+.tech__description {
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 26px auto 0;
+  text-align: center;
+}
+
+.tech__container {
+  display: flex;
+  flex-direction: row;
+  margin: 100px auto 0;
+}
+
+.tech__item {
+  width: 90px;
+  height: 60px;
+  border-radius: 10px;
+  margin: 0 5px;
+  background-color: #303030;
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+}

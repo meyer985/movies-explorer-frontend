@@ -1,5 +1,5 @@
 import React from "react";
-import Aboutme from "../AboutMe/Aboutme";
+import AboutMe from "../AboutMe/AboutMe";
 import AboutProject from "../AboutProject/AboutProject";
 import Portfolio from "../Portfolio/Portfolio";
 import Promo from "../Promo/Promo";
@@ -12,8 +12,7 @@ function Main(props) {
       <Promo />
       <AboutProject />
       <Techs />
-      <Aboutme />
-      <Portfolio />
+      <AboutMe />
     </div>
   );
 }
