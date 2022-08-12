@@ -1,4 +1,3 @@
-import "./App.css";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Main from "../Main/Main";
@@ -13,7 +12,8 @@ import Header from "../Header/Header";
 
 function App() {
   return (
-    <div className="page">
+    <>
+      <Header />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/movies" element={<Movies />} />
@@ -24,7 +24,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
-    </div>
+    </>
   );
 }
 

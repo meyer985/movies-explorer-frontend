@@ -1,0 +1,56 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 74px 0 70px;
+  align-items: center;
+}
+
+.profile__header {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.edit {
+  margin-top: 123px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: repeat(3, auto);
+  min-width: 410px;
+}
+
+.edit__underline {
+  border-top: 1px solid #424242;
+  grid-column: span 2;
+  margin: 16px 0 17px;
+}
+.edit__label {
+  font-size: 11px;
+  line-height: 1.18;
+}
+
+.edit__input {
+  background-color: transparent;
+  border: none;
+  font-size: 11px;
+  line-height: 1.18;
+  text-align: end;
+}
+
+.profile__button {
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 13px;
+}
+
+.profile__button_type_edit {
+  margin-top: 220px;
+}
+
+.profile__button_type_checkout {
+  margin-top: 16px;
+  color: #ee3465;
+}

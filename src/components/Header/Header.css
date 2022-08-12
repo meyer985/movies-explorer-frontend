@@ -1,6 +1,9 @@
 .header {
+  max-width: 1280px;
+  margin: 0 auto;
   padding: 18px 70px;
   border: 1px dotted yellow;
+  box-sizing: border-box;
 }
 
 .header__nav {

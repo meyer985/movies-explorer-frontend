@@ -4,7 +4,7 @@ import "./Footer.css";
 function Footer(props) {
   const date = new Date();
   return (
-    <section className="footer">
+    <footer className="footer">
       <p className="footer__text">
         Учебный проект Яндекс.Практикум х BeatFilm.
       </p>
@@ -16,7 +16,7 @@ function Footer(props) {
           <a className="footer__link">Facebook</a>
         </nav>
       </div>
-    </section>
+    </footer>
   );
 }
 

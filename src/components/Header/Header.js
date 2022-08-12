@@ -5,7 +5,7 @@ import logo from "../../images/logo.svg";
 
 function Header(props) {
   return (
-    <section className="header">
+    <header className="header">
       <nav className="header__nav">
         <a href="/" className="header__logo">
           <img src={logo} alt="логотип" />
@@ -23,7 +23,7 @@ function Header(props) {
           <div className="account-btn__userpic"></div>
         </a>
       </nav>
-    </section>
+    </header>
   );
 }
 

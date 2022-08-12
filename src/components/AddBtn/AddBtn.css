@@ -1,0 +1,12 @@
+.add-btn {
+  padding: 50px 70px 80px;
+}
+
+.add-btn__button {
+  background-color: #2f2f2f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  height: 36px;
+  min-width: 100%;
+}
