@@ -8,12 +8,12 @@ import "./Main.css";
 
 function Main(props) {
   return (
-    <div className="main">
+    <section className="main">
       <Promo />
       <AboutProject />
       <Techs />
       <AboutMe />
-    </div>
+    </section>
   );
 }
 

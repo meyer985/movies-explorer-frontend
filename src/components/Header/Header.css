@@ -1,0 +1,48 @@
+.header {
+  padding: 18px 70px;
+  border: 1px dotted yellow;
+}
+
+.header__nav {
+  display: grid;
+  grid-template-columns: 100px 1fr 105px;
+  align-items: center;
+}
+
+.header__center-block {
+  justify-self: center;
+}
+
+.header__link {
+  text-decoration: none;
+  color: white;
+  margin: 0 16px 0 0;
+  font-size: 13px;
+  line-height: 1.38;
+  font-weight: 400;
+}
+
+.header__link_picked {
+  font-weight: 500;
+}
+
+.account-btn {
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  align-items: center;
+}
+
+.account-btn__userpic {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background-color: #313131;
+  background-image: url("../../images/userpic.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.account-btn__link {
+  margin-right: 13px;
+}
