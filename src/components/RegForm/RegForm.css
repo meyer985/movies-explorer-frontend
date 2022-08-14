@@ -1,0 +1,32 @@
+.reg-form {
+  max-width: 396px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.reg-form__submit {
+  margin-top: 59px;
+  height: 45px;
+  background-color: #4285f4;
+  border-radius: 3px;
+  color: white;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.reg-form__caption {
+  font-size: 14px;
+  line-height: 1.2;
+  color: #8b8b8b;
+  margin: 0;
+  text-align: center;
+  padding-top: 16px;
+}
+
+.reg-form__link {
+  color: #4285f4;
+  margin: 0;
+  text-decoration: none;
+  padding-left: 6px;
+}

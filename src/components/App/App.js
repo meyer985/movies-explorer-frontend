@@ -13,7 +13,6 @@ import Header from "../Header/Header";
 function App() {
   return (
     <>
-      <Header />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/movies" element={<Movies />} />
@@ -23,7 +22,6 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer />
     </>
   );
 }
