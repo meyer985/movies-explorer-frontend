@@ -9,6 +9,7 @@
   font-size: 50px;
   line-height: 1.16;
   margin: 90px auto 0;
+  letter-spacing: -0.04em;
 }
 
 .tech__description {
@@ -16,12 +17,16 @@
   line-height: 1.4;
   margin: 26px auto 0;
   text-align: center;
+  letter-spacing: -0.04em;
+  max-width: 460px;
 }
 
 .tech__container {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
-  margin: 100px auto 0;
+  margin-top: 100px;
+  justify-content: center;
 }
 
 .tech__item {
@@ -34,4 +39,62 @@
   display: grid;
   place-items: center;
   font-size: 14px;
+  letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 1024px) {
+  .techs {
+    padding: 90px 50px;
+  }
+
+  .tech__header {
+    margin-top: 80px;
+  }
+
+  .tech__description {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-top: 22px;
+  }
+
+  .tech__container {
+    margin-top: 83px;
+  }
+
+  .tech__item {
+    width: 84px;
+    height: 57px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .techs {
+    padding: 70px 18px;
+  }
+
+  .tech__header {
+    font-size: 30px;
+    line-height: 1.2;
+    margin-top: 60px;
+  }
+
+  .tech__description {
+    font-size: 11px;
+    line-height: 1.45;
+    margin-top: 24px;
+  }
+
+  .tech__container {
+    margin: 50px auto 0;
+    max-width: 200px;
+  }
+
+  .tech__item {
+    width: 84px;
+    height: 57px;
+    font-size: 12px;
+    margin: 5px 5px;
+    align-self: flex-start;
+  }
 }

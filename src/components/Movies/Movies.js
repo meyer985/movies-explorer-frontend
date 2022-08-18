@@ -4,17 +4,18 @@ import Cards from "../Cards/Cards";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
-import "./Movies.css";
+import Main from "../Main/Main";
+import films from "../films";
 
 function Movies(props) {
   return (
     <>
-      <Header type={"in"} />
-      <main className="movies">
+      <Header isLoggedIn={true} />
+      <Main>
         <SearchForm />
-        <Cards />
+        <Cards data={films[0]} />
         <AddBtn />
-      </main>
+      </Main>
       <Footer />
     </>
   );

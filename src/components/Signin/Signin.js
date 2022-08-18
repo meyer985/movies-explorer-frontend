@@ -1,17 +1,18 @@
 import React from "react";
 import RegForm from "../RegForm/RegForm";
-import Header from "../Header/Header";
 import InputBlock from "../InputBlock/InputBlock";
+import RegisterHeader from "../RegisterHeader/RegisterHeader";
 
 function Signin(props) {
   return (
     <>
-      <Header text={"Рады видеть!"} type={"reg"} />
+      <RegisterHeader greeting={"Рады видеть!"} />
       <RegForm
-        ubmit={"Войти"}
+        submit={"Войти"}
         caption={"Ещё не зарегистрированы?"}
         link={"Регистрация"}
         href={"/signup"}
+        shortForm={true}
       >
         <InputBlock
           type={"email"}

@@ -4,14 +4,20 @@
 }
 
 .card__image {
-  padding-bottom: 10px;
+  justify-self: center;
+  height: 151px;
+  width: 100%;
+  object-fit: cover;
 }
 
 .card__capture {
-  display: grid;
-  grid-template-columns: 1fr 24px;
-  column-gap: 20px;
-  align-items: center;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: space-between;
+  height: 50px;
+  border-bottom: 1px solid #424242;
 }
 
 .card__name {
@@ -19,22 +25,31 @@
   line-height: 1.2;
   font-weight: 500;
   margin: 0;
+  padding-top: 4px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  max-width: calc(100% - 44px);
 }
 
-.card__like {
+.card__button {
+  margin-left: 20px;
   width: 24px;
   height: 24px;
   border-radius: 50%;
   background-color: #313131;
-  background-image: url("../../images/heart.svg");
-  background-position: center;
+  background-position-x: center;
+  background-position-y: 8px;
   background-repeat: no-repeat;
   border: none;
 }
-
-.card__line {
-  border-top: 1px solid #424242;
-  margin-top: 25px;
+.card__button_type_like {
+  background-image: url("../../images/heart.svg");
+}
+.card__button_type_remove {
+  background-image: url("../../images/cross_icon.svg");
+  background-position: center;
 }
 
 .card__time {

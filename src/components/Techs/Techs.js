@@ -10,8 +10,8 @@ function Techs(props) {
       </div>
       <p className="tech__header">7 технологий</p>
       <p className="tech__description">
-        На курсе веб-разработки мы освоили технологии, которые применили
-        <br /> в дипломном проекте.
+        На курсе веб-разработки мы освоили технологии, которые применили в
+        дипломном проекте.
       </p>
       <div className="tech__container">
         {techs.map((item, index) => {

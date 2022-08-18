@@ -2,18 +2,28 @@ import React from "react";
 import "./Card.css";
 import test_film from "../../images/test_film.svg";
 
-function Card(props) {
+function Card({ image, name, duration, isSaved }) {
   return (
-    <div className="card">
-      <img className="card__image" src={test_film}></img>
+    <li className="card">
+      <img
+        className="card__image"
+        src={`https://api.nomoreparties.co/${image}`}
+        alt={name}
+      />
       <div className="card__capture">
-        <p className="card__name">33 слова о дизайне</p>
-        <button type="button" className="card__like"></button>
+        <p className="card__name">{name} </p>
+        <button
+          type="button"
+          className={
+            isSaved
+              ? `card__button card__button_type_remove`
+              : `card__button card__button_type_like `
+          }
+        />
       </div>
-      <div className="card__line">
-        <p className="card__time">1ч42м</p>
-      </div>
-    </div>
+
+      <p className="card__time">{duration}</p>
+    </li>
   );
 }
 

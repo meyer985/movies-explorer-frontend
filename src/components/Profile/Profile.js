@@ -1,11 +1,12 @@
 import React from "react";
 import Header from "../Header/Header";
+import Main from "../Main/Main";
 import "./Profile.css";
 
 function Profile(props) {
   return (
     <>
-      <Header type={"in"} />
+      <Header isLoggedIn={true} />
       <main className="profile">
         <h1 className="profile__header">Привет, Виталий!</h1>
         <form className="profile__form edit">

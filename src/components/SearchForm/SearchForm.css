@@ -1,18 +1,16 @@
 .search {
   display: flex;
   flex-direction: column;
-  padding: 70px 70px 0;
+  padding: 68px 70px 48px;
   border: 1px dotted yellow;
 }
 
 .search__container {
   display: grid;
+  padding-bottom: 15px;
   border-bottom: 1px solid #424242;
-  padding-top: 70px;
-  padding-bottom: 43px;
   grid-template-columns: 34px 1fr 34px;
-  grid-template-rows: auto auto;
-  row-gap: 30px;
+  margin-bottom: 30px;
 }
 
 .search__icon {
@@ -20,6 +18,7 @@
   height: 34px;
   border-radius: 50%;
   border: 1px solid #424242;
+  margin-left: 6px;
   background-image: url("../../images/lense.svg");
   background-position: center;
   background-repeat: no-repeat;
@@ -47,13 +46,14 @@
   background-repeat: no-repeat;
 }
 
-.search__radio-block {
+.radio {
   grid-column-start: 2;
   justify-self: center;
   display: flex;
   flex-direction: row;
   align-items: center;
   position: relative;
+  align-self: center;
 }
 
 .radio__label {

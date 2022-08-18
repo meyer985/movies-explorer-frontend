@@ -3,16 +3,17 @@ import Cards from "../Cards/Cards";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
-import "./SavedMovies.css";
+import Main from "../Main/Main";
+import films from "../films";
 
 function SavedMovies(props) {
   return (
     <>
-      <Header type={"in"} />
-      <main className="saved-movies">
+      <Header isLoggedIn={true} />
+      <Main>
         <SearchForm />
-        <Cards />
-      </main>
+        <Cards data={films[1]} isSaved={true} />
+      </Main>
       <Footer />
     </>
   );

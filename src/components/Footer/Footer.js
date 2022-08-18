@@ -10,7 +10,7 @@ function Footer(props) {
       </p>
       <div className="footer__menu">
         <p className="footer__date">&copy; {date.getFullYear()}</p>
-        <nav classname="footer__links">
+        <nav className="footer__links">
           <a className="footer__link">Яндекс.Практикум</a>
           <a className="footer__link">Github</a>
           <a className="footer__link">Facebook</a>

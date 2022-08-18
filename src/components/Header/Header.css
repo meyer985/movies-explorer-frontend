@@ -1,18 +1,11 @@
 .header {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 18px 70px;
-  border: 1px dotted yellow;
-  box-sizing: border-box;
+  padding: 15px 70px;
 }
 
 .header_type_main {
   background-color: #073042;
-}
-
-.header_type_reg {
-  max-width: 396px;
-  padding: 70px 0 0;
 }
 
 .header__text {
@@ -22,14 +15,15 @@
   padding: 40px 0 40px;
 }
 
-.header__text_hidden {
-  display: none;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.navbar {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  align-items: center;
+.navbar__logo {
+  height: 38px;
+  width: 38px;
 }
 
 .navbar_type_logged-out {
@@ -40,10 +34,7 @@
 
 .navbar__center-block {
   justify-self: center;
-}
-
-.navbar__center-block_hidden {
-  display: none;
+  padding-left: 70px;
 }
 
 .navbar__link {
@@ -65,10 +56,7 @@
   text-decoration: none;
   align-items: center;
   justify-self: flex-end;
-}
-
-.account-btn_hidden {
-  display: none;
+  height: 44px;
 }
 
 .account-btn__userpic {
@@ -83,26 +71,31 @@
 
 .account-btn__link {
   margin-right: 13px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.14;
 }
 
 .enter-block {
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-.enter-block_hidden {
-  display: none;
+  height: 44px;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 
 .enter-block__link {
   text-decoration: none;
   color: white;
   margin: 0;
+  font-size: 12px;
+  line-height: 1.3;
+  font-weight: 500;
 }
 
 .enter-block__link_type_bold {
-  margin-right: 30px;
+  margin-right: 25px;
 }
 
 .enter-block__container {
@@ -117,4 +110,48 @@
 
 .enter-block__link_type_boxed {
   color: black;
+}
+
+.header__burger {
+  width: 44px;
+  height: 44px;
+  background-image: url("../../images/burger.svg");
+  background-position: center;
+  background-color: transparent;
+  border: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .header {
+    padding: 15px 30px;
+  }
+
+  .enter-block__link_type_bold {
+    margin-right: 30px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    padding: 15px 14px;
+  }
+
+  .enter-block__link_type_bold {
+    margin-right: 14px;
+  }
+
+  .header__burger {
+    height: 43px;
+    width: 40px;
+  }
+
+  .enter-block__link {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+  .enter-block__container {
+    width: 54px;
+    height: 26px;
+  }
 }

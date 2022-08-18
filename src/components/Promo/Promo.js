@@ -1,15 +1,14 @@
 import React from "react";
 import "./Promo.css";
-import { Link } from "react-router-dom";
+import logo from "../../images/text__COLOR_landing-logo.svg";
 
 function Promo(props) {
   return (
     <section className="main__promo promo">
       <h1 className="promo__title">
-        Учебный проект студента
-        <br /> факультета Веб-разработки.
+        Учебный проект студента факультета Веб-разработки.
       </h1>
-      <div className="promo__image"></div>
+      <img className="promo__image" src={logo} alt="спираль" />
     </section>
   );
 }

@@ -8,13 +8,13 @@ function SearchForm(props) {
         <div className="search__icon"></div>
         <input type="text" className="search__input" placeholder="Фильм" />
         <inbut type="submit" className="search__btn" />
-        <div className="search__radio-block radio">
-          <input type="checkbox" className="radio__toggle" />
-          <div className="radio__castom"></div>
-
-          <label className="radio__label">Короткометражки</label>
-        </div>
       </form>
+      <div className="search__radio-block radio">
+        <input type="checkbox" className="radio__toggle" />
+        <div className="radio__castom"></div>
+
+        <label className="radio__label">Короткометражки</label>
+      </div>
     </section>
   );
 }

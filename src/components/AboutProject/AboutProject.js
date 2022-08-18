@@ -8,16 +8,21 @@ function AboutProject(props) {
         <h3 className="section__header">О проекте</h3>
       </div>
       <div className="about__content table">
-        <p className="table__header">Дипломный проект включал 5 этапов</p>
-        <p className="table__header">На выполнение диплома ушло 5 недель</p>
-        <p className="table__content">
-          Составление плана, работу над бэкендом, вёрстку, добавление
-          функциональности и финальные доработки.
-        </p>
-        <p className="table__content">
-          У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было
-          соблюдать, чтобы успешно защититься.
-        </p>
+        <div className="table__block">
+          <p className="table__header">Дипломный проект включал 5 этапов</p>
+          <p className="table__content">
+            Составление плана, работу над бэкендом, вёрстку, добавление
+            функциональности и финальные доработки.
+          </p>
+        </div>
+        <div className="table__block table__block_type_last">
+          <p className="table__header">На выполнение диплома ушло 5 недель</p>
+
+          <p className="table__content">
+            У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было
+            соблюдать, чтобы успешно защититься.
+          </p>
+        </div>
       </div>
       <div className="about__timeline timeline">
         <p className="timeline__content timeline__content_type_black">

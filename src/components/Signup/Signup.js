@@ -2,11 +2,12 @@ import React from "react";
 import InputBlock from "../InputBlock/InputBlock";
 import RegForm from "../RegForm/RegForm";
 import Header from "../Header/Header";
+import RegisterHeader from "../RegisterHeader/RegisterHeader";
 
 function Signup(props) {
   return (
     <>
-      <Header text={"Добро пожаловать!"} type={"reg"} />
+      <RegisterHeader greeting={"Добро пожаловать!"} />
       <RegForm
         submit={"Зарегистрироваться"}
         caption={"Уже зарегистрированы?"}
