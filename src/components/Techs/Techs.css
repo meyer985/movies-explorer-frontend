@@ -86,7 +86,9 @@
   }
 
   .tech__container {
-    margin: 50px auto 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 47px auto 0;
     max-width: 200px;
   }
 
@@ -95,6 +97,5 @@
     height: 57px;
     font-size: 12px;
     margin: 5px 5px;
-    align-self: flex-start;
   }
 }

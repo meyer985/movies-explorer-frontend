@@ -55,3 +55,39 @@
   margin-top: 16px;
   color: #ee3465;
 }
+
+@media screen and (max-width: 800px) {
+  .profile {
+    padding: 236px 0 269px;
+  }
+
+  .edit {
+    margin-top: 96px;
+  }
+
+  .profile__button_type_edit {
+    margin-top: 210px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .profile {
+    padding: 70px 30px 40px;
+  }
+
+  .edit {
+    min-width: 100%;
+    margin-top: 80px;
+  }
+
+  .profile__button_type_edit {
+    margin-top: 210px;
+  }
+
+  .profile__button_type_edit {
+    margin-top: 379px;
+  }
+  .profile__button {
+    font-size: 12px;
+  }
+}

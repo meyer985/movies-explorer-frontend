@@ -59,3 +59,25 @@
   margin-top: 6px;
   margin-bottom: 0;
 }
+
+@media screen and (max-width: 800px) {
+  .card__image {
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .card__image {
+    height: 168px;
+  }
+
+  .card__name {
+    font-size: 12px;
+    padding-top: 5px;
+  }
+
+  .card__time {
+    color: #8b8b8b;
+    font-size: 10px;
+  }
+}

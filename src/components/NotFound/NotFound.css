@@ -28,3 +28,17 @@
   color: #4285f4;
   font-size: 14px;
 }
+
+@media screen and (max-width: 520px) {
+  .not-found__code {
+    font-size: 80px;
+  }
+
+  .not-found__message {
+    font-size: 12px;
+  }
+  .not-found__button {
+    font-size: 12px;
+    bottom: 30px;
+  }
+}

@@ -2,18 +2,16 @@ import React, { useState, useEffect, useContext } from "react";
 import "./Header.css";
 import logo from "../../images/logo.svg";
 import context from "../../context/context";
+import Navigation from "../Navigation/Navigation";
 
 function Header({ isMainPage, type, text, isLoggedIn }) {
   const appData = useContext(context);
-  const [size, setSize] = useState(appData.size);
-  useEffect(() => {
-    setSize(appData.size);
-  }, [size]);
+  const [sideMenuOn, setSideMenuOn] = useState(false);
 
   return (
     <header className={isMainPage ? "header header_type_main" : "header"}>
-      <nav className="navbar">
-        <a href="/" className="navbar__logo">
+      <nav className="header__menu menu">
+        <a href="/" className="menu__logo">
           <img src={logo} alt="логотип" />
         </a>
         {!isLoggedIn ? (
@@ -24,107 +22,38 @@ function Header({ isMainPage, type, text, isLoggedIn }) {
             >
               Регистрация
             </a>
-            <div className="enter-block__container ">
-              <a
-                className="enter-block__link enter-block__link_type_boxed"
-                href="/signin"
-              >
-                Войти
-              </a>
-            </div>
+            <a
+              className="enter-block__link enter-block__link_type_boxed"
+              href="/signin"
+            >
+              Войти
+            </a>
           </span>
         ) : appData.size > 768 ? (
-          <>
-            <span className="navbar__center-block">
-              <a href="/movies" className="navbar__link">
-                Фильмы
-              </a>
-              <a href="/saved-movies" className="navbar__link">
-                Сохранённые фильмы
-              </a>
-            </span>
-            <a href="/profile" className="navbar__account-btn account-btn">
-              <p className="navbar__link account-btn__link">Аккаунт</p>
-              <div className="account-btn__userpic"></div>
-            </a>
-          </>
+          <Navigation />
         ) : (
-          <button className="header__burger"></button>
+          <button
+            className="header__burger"
+            onClick={() => setSideMenuOn(true)}
+          ></button>
         )}
+      </nav>
+      <nav
+        onClick={() => setSideMenuOn(false)}
+        className={
+          sideMenuOn && appData.size < 769
+            ? "header__side-menu side-menu side-menu_type_on"
+            : "side-menu"
+        }
+      >
+        <button
+          onClick={() => setSideMenuOn(false)}
+          className="side-menu__close"
+        ></button>
+        <Navigation />
       </nav>
     </header>
   );
-  // return (
-  //   <header
-  //     className={
-  //       isMainPage
-  //         ? "header header_type_main"
-  //         : type === "reg"
-  //         ? "header header_type_reg"
-  //         : "header"
-  //     }
-  //   >
-  //     <nav
-  //       className={
-  //         type === "in" ? "header__navbar navbar" : "navbar_type_logged-out"
-  //       }
-  //     >
-  //       <a href="/" className="navbar__logo">
-  //         <img src={logo} alt="логотип" />
-  //       </a>
-  //       <span
-  //         className={
-  //           type === "in"
-  //             ? "navbar__center-block"
-  //             : "navbar__center-block_hidden"
-  //         }
-  //       >
-  //         <a href="/movies" className="navbar__link">
-  //           Фильмы
-  //         </a>
-  //         <a href="/saved-movies" className="navbar__link">
-  //           Сохранённые фильмы
-  //         </a>
-  //       </span>
-  //       <a
-  //         href="/profile"
-  //         className={
-  //           type === "in"
-  //             ? "navbar__account-btn account-btn"
-  //             : "account-btn_hidden"
-  //         }
-  //       >
-  //         <p className="navbar__link account-btn__link">Аккаунт</p>
-  //         <div className="account-btn__userpic"></div>
-  //       </a>
-  //       <span
-  //         className={
-  //           type === "out"
-  //             ? "header__enter-block enter-block"
-  //             : "enter-block_hidden"
-  //         }
-  //       >
-  //         <a
-  //           className="enter-block__link enter-block__link_type_bold"
-  //           href="/signup"
-  //         >
-  //           Регистрация
-  //         </a>
-  //         <div className="enter-block__container ">
-  //           <a
-  //             className="enter-block__link enter-block__link_type_boxed"
-  //             href="/signin"
-  //           >
-  //             Войти
-  //           </a>
-  //         </div>
-  //       </span>
-  //     </nav>
-  //     <p className={type === "reg" ? "header__text" : "header__text_hidden"}>
-  //       {text}
-  //     </p>
-  //   </header>
-  // );
 }
 
 export default Header;
