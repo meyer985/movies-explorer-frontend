@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import "./Header.css";
 import logo from "../../images/logo.svg";
 import context from "../../context/context";

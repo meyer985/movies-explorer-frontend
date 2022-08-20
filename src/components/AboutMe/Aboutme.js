@@ -1,8 +1,8 @@
 import React from "react";
 import "./AboutMe.css";
-import pic__COLOR_pic from "../../images/pic__COLOR_pic.svg";
+import pic__COLOR_pic from "../../images/pic__COLOR_pic-min.svg";
 
-function Aboutme(props) {
+function AboutMe(props) {
   return (
     <section className="student">
       <div className="section__text-frame">
@@ -41,4 +41,4 @@ function Aboutme(props) {
   );
 }
 
-export default Aboutme;
+export default AboutMe;
