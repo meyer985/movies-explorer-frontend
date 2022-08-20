@@ -1,7 +1,7 @@
 import React from "react";
 import InputBlock from "../InputBlock/InputBlock";
 import RegForm from "../RegForm/RegForm";
-import Header from "../Header/Header";
+
 import RegisterHeader from "../RegisterHeader/RegisterHeader";
 
 function Signup(props) {

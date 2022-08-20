@@ -4,7 +4,7 @@ import "./AddBtn.css";
 function AddBtn(props) {
   return (
     <section className="add-btn">
-      <button type="button" className="add-btn__button">
+      <button type="button" className="add-btn__button button">
         Ещё
       </button>
     </section>

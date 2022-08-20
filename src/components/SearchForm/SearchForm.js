@@ -7,13 +7,13 @@ function SearchForm(props) {
       <form className="search__container">
         <div className="search__icon"></div>
         <input type="text" className="search__input" placeholder="Фильм" />
-        <inbut type="submit" className="search__btn" />
+        <input type="submit" className="search__btn button" value="" />
       </form>
-      <div className="search__radio-block radio">
-        <input type="checkbox" className="radio__toggle" />
-        <div className="radio__castom"></div>
+      <div className="search__checkbox checkbox">
+        <input type="checkbox" className="checkbox__toggle" />
+        <div className="checkbox__castom"></div>
 
-        <label className="radio__label">Короткометражки</label>
+        <label className="checkbox__label">Короткометражки</label>
       </div>
     </section>
   );

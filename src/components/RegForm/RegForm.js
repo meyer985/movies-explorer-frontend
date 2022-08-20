@@ -7,17 +7,15 @@ function RegForm({ children, submit, caption, href, link, shortForm }) {
       {children}
       <input
         type="submit"
-        className={
-          shortForm
-            ? "reg-form__submit reg-form__submit_type_short"
-            : "reg-form__submit"
-        }
+        className={`reg-form__submit button ${
+          shortForm ? "reg-form__submit_type_short" : ""
+        }`}
         value={submit}
       />
 
       <p className="reg-form__caption">
         {caption}
-        <a href={href} className=" reg-form__caption reg-form__link">
+        <a href={href} className=" reg-form__caption reg-form__link link">
           {link}
         </a>
       </p>

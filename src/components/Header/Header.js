@@ -4,26 +4,26 @@ import logo from "../../images/logo.svg";
 import context from "../../context/context";
 import Navigation from "../Navigation/Navigation";
 
-function Header({ isMainPage, type, text, isLoggedIn }) {
+function Header({ isMainPage, isLoggedIn }) {
   const appData = useContext(context);
   const [sideMenuOn, setSideMenuOn] = useState(false);
 
   return (
     <header className={isMainPage ? "header header_type_main" : "header"}>
       <nav className="header__menu menu">
-        <a href="/" className="menu__logo">
+        <a href="/" className="menu__logo link">
           <img src={logo} alt="логотип" />
         </a>
         {!isLoggedIn ? (
           <span className="header__enter-block enter-block">
             <a
-              className="enter-block__link enter-block__link_type_bold"
+              className="enter-block__link enter-block__link_type_bold link"
               href="/signup"
             >
               Регистрация
             </a>
             <a
-              className="enter-block__link enter-block__link_type_boxed"
+              className="enter-block__link enter-block__link_type_boxed button"
               href="/signin"
             >
               Войти

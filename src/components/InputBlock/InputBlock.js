@@ -10,7 +10,7 @@ function InputBlock(props) {
         placeholder={props.placeholder}
         className="input__field"
       />
-      <span className="inut__error-message">Что-то пошло не так</span>
+      <span className="inut__error-message">Что-то пошло не так...</span>
     </>
   );
 }

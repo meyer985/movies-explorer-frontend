@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../Header/Header";
-import Main from "../Main/Main";
 import "./Profile.css";
 
 function Profile(props) {
+  const [isUpdating, setIsUpdating] = useState(true);
   return (
     <>
       <Header isLoggedIn={true} />
@@ -20,18 +20,26 @@ function Profile(props) {
             placeholder="pochta@pochta.ru"
           />
         </form>
-        <button
-          type="button"
-          className="profile__button profile__button_type_edit"
-        >
-          Редактировать
-        </button>
-        <button
-          type="button"
-          className="profile__button profile__button_type_checkout"
-        >
-          Выйти из аккаунта
-        </button>
+        {isUpdating ? (
+          <button className="profile__button profile__button_type_edit profile__button_type_save button">
+            Сохранить
+          </button>
+        ) : (
+          <>
+            <button
+              type="button"
+              className="profile__button profile__button_type_edit button"
+            >
+              Редактировать
+            </button>
+            <button
+              type="button"
+              className="profile__button profile__button_type_checkout button"
+            >
+              Выйти из аккаунта
+            </button>
+          </>
+        )}
       </main>
     </>
   );

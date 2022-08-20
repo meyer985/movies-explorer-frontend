@@ -42,7 +42,6 @@
 .profile__button {
   margin: 0;
   background-color: transparent;
-  border: none;
   color: white;
   font-size: 13px;
 }
@@ -54,6 +53,13 @@
 .profile__button_type_checkout {
   margin-top: 16px;
   color: #ee3465;
+}
+
+.profile__button_type_save {
+  background-color: #2f2f2f;
+  border-radius: 6px;
+  height: 36px;
+  min-width: 410px;
 }
 
 @media screen and (max-width: 800px) {
@@ -89,5 +95,9 @@
   }
   .profile__button {
     font-size: 12px;
+  }
+
+  .profile__button_type_save {
+    min-width: 80%;
   }
 }

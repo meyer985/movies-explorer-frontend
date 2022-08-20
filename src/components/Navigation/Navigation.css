@@ -1,6 +1,6 @@
 .center-block {
   justify-self: center;
-  padding-left: 70px;
+  padding-left: 75px;
 }
 
 .menu__main {
@@ -26,7 +26,10 @@
   text-decoration: none;
   align-items: center;
   justify-self: flex-end;
-  height: 44px;
+}
+
+.account-btn__picked {
+  font-weight: 500;
 }
 
 .account-btn__userpic {
@@ -80,6 +83,10 @@
   .account-btn {
     position: absolute;
     bottom: 92px;
+  }
+
+  .account-btn__picked {
+    border-bottom: 2px solid white;
   }
 }
 

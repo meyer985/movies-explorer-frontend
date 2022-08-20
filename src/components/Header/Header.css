@@ -2,6 +2,7 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 15px 70px;
+  min-height: 74px;
 }
 
 .header_type_main {
@@ -24,6 +25,23 @@
 
 .menu__logo {
   height: 38px;
+}
+
+.link {
+  transition: 0.2s;
+}
+
+.button {
+  transition: 0.2s;
+  border: none;
+}
+
+.link:hover {
+  opacity: 0.7;
+}
+
+.button:hover {
+  opacity: 0.8;
 }
 
 .enter-block {
@@ -112,7 +130,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .header {
     padding: 15px 30px;
   }

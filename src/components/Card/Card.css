@@ -5,16 +5,20 @@
 
 .card__image {
   justify-self: center;
-  height: 151px;
+  height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+.card__link {
+  height: 151px;
 }
 
 .card__capture {
   margin-top: 10px;
   display: flex;
   flex-direction: row;
-  align-items: start;
+  align-items: flex-start;
   justify-content: space-between;
   height: 50px;
   border-bottom: 1px solid #424242;
@@ -34,22 +38,31 @@
 }
 
 .card__button {
+  padding: 0;
   margin-left: 20px;
   width: 24px;
   height: 24px;
   border-radius: 50%;
   background-color: #313131;
-  background-position-x: center;
-  background-position-y: 8px;
+  background-position: center;
   background-repeat: no-repeat;
   border: none;
 }
 .card__button_type_like {
-  background-image: url("../../images/heart.svg");
+  background-image: url("../../images/grey-heart.svg");
 }
+
+.card__button_type_liked {
+  background-image: url("../../images/heart-red.svg");
+}
+
 .card__button_type_remove {
+  display: none;
   background-image: url("../../images/cross_icon.svg");
-  background-position: center;
+}
+
+.card:hover .card__button_type_remove {
+  display: block;
 }
 
 .card__time {
@@ -61,13 +74,13 @@
 }
 
 @media screen and (max-width: 800px) {
-  .card__image {
+  .card__link {
     height: 190px;
   }
 }
 
 @media screen and (max-width: 500px) {
-  .card__image {
+  .card__link {
     height: 168px;
   }
 

@@ -1,12 +1,20 @@
 import React from "react";
 import "./Portfolio.css";
-import arrow_top_right from "../../images/arrow_top_right.svg";
 
 function Portfolio(props) {
   const portfolio = [
-    { name: "Статичный сайт", link: "link" },
-    { name: "Адаптивный сайт", link: "link" },
-    { name: "Одностраничное приложение", link: "link" },
+    {
+      name: "Статичный сайт",
+      link: "https://github.com/meyer985/how-to-learn",
+    },
+    {
+      name: "Адаптивный сайт",
+      link: "https://github.com/meyer985/russian-travel",
+    },
+    {
+      name: "Одностраничное приложение",
+      link: "https://github.com/meyer985/react-mesto-api-full",
+    },
   ];
 
   return (
@@ -16,7 +24,12 @@ function Portfolio(props) {
         {portfolio.map((item, index) => {
           return (
             <li className="portfolio__item item" key={index}>
-              <a className="item__link" href={item.link}>
+              <a
+                className="item__link link"
+                href={item.link}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <p className="item__name">{item.name}</p>
                 <div className="item__arrow"></div>
               </a>

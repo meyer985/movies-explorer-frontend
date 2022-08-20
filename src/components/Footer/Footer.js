@@ -11,9 +11,30 @@ function Footer(props) {
       <div className="footer__menu">
         <p className="footer__date">&copy; {date.getFullYear()}</p>
         <nav className="footer__links">
-          <a className="footer__link">Яндекс.Практикум</a>
-          <a className="footer__link">Github</a>
-          <a className="footer__link">Facebook</a>
+          <a
+            className="footer__link link"
+            href="https://practicum.yandex.ru"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Яндекс.Практикум
+          </a>
+          <a
+            className="footer__link link"
+            href="https://github.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Github
+          </a>
+          <a
+            className="footer__link link"
+            href="https://facebook.com"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Facebook
+          </a>
         </nav>
       </div>
     </footer>
