@@ -1,9 +1,23 @@
 import React from "react";
 import "./RegForm.css";
 
-function RegForm({ children, submit, caption, href, link, shortForm }) {
+function RegForm({
+  children,
+  submit,
+  caption,
+  href,
+  link,
+  shortForm,
+  formSubmit,
+}) {
   return (
-    <form className="reg-form">
+    <form
+      className="reg-form"
+      onSubmit={(e) => {
+        e.preventDefault();
+        formSubmit();
+      }}
+    >
       {children}
       <input
         type="submit"
@@ -11,6 +25,7 @@ function RegForm({ children, submit, caption, href, link, shortForm }) {
           shortForm ? "reg-form__submit_type_short" : ""
         }`}
         value={submit}
+        formNoValidate
       />
 
       <p className="reg-form__caption">

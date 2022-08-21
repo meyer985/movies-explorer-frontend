@@ -36,6 +36,11 @@
   padding-left: 6px;
 }
 
+.reg-form:invalid .reg-form__submit {
+  background-color: #8b8b8b;
+  pointer-events: none;
+}
+
 @media screen and (max-width: 768px) {
   .reg-form {
     max-width: 260px;

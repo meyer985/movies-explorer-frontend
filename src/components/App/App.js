@@ -9,12 +9,14 @@ import Signup from "../Signup/Signup";
 import NotFound from "../NotFound/NotFound";
 import context from "../../context/context";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import api from "../../utils/myApi";
 
 function App() {
-  const history = useNavigate();
-  /*отслеживаю размер окна*/
+  const navigation = useNavigate();
   const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  /*отслеживаю размер окна*/
   function windowResize() {
     setWindowSize(window.innerWidth);
   }
@@ -26,8 +28,51 @@ function App() {
     };
   }, []);
 
-  /*авторизация*/
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  /*регистрация пользователя*/
+  function addUser(data) {
+    api
+      .addUser(data)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          console.log("Произошла ошибка");
+          return;
+        }
+      })
+      .then((res) => {
+        api
+          .login({ email: data.email, password: data.password })
+          .then((res) => {
+            if (res.ok) {
+              return res.json();
+            } else {
+              console.log("Произошла ошибка");
+              return;
+            }
+          })
+          .then((res) => {
+            if (res.jwt) {
+              localStorage.setItem("token", res.jwt);
+              setIsLoggedIn(true);
+              navigation("/movies");
+            } else {
+              console.log("Ошибка авторизации");
+            }
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+  }
+
+  /*авторизация по логин-паролю*/
+  function loginUser(data) {
+    api
+      .login(data)
+      .then((res) => res.json())
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }
 
   return (
     <context.Provider value={{ size: windowSize }}>
@@ -58,9 +103,9 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="*" element={<NotFound history={history} />} />
+          <Route path="/signin" element={<Signin signin={loginUser} />} />
+          <Route path="/signup" element={<Signup signup={addUser} />} />
+          <Route path="*" element={<NotFound history={navigation} />} />
         </Routes>
       </>
     </context.Provider>
