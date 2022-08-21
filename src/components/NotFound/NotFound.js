@@ -11,7 +11,7 @@ function NotFound({ history }) {
       <button
         type="button"
         className="not-found__button"
-        onClick={() => history.back()}
+        onClick={() => history(-1)}
       >
         Назад
       </button>
