@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import "./Profile.css";
 
 function Profile(props) {
-  const [isUpdating, setIsUpdating] = useState(true);
+  const [isUpdating, setIsUpdating] = useState(false);
   return (
     <>
       <Header isLoggedIn={true} />
