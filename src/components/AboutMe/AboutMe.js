@@ -23,14 +23,18 @@ function AboutMe(props) {
 
           <span className="student__links">
             <a
-              href="https://ru-ru.facebook.com/"
+              href="https://www.facebook.com/alexey.grabovenko"
               className="student__link link"
+              target="_blank"
+              rel="noreferrer"
             >
               Facebook
             </a>
             <a
               href="https://github.com/meyer985"
               className="student__link link"
+              target="_blank"
+              rel="noreferrer"
             >
               Github
             </a>

@@ -23,7 +23,7 @@ function InputBlock({
         required
         type={type}
         placeholder={placeholder}
-        className="input__field"
+        className="input__field input"
         noValidate
         pattern={pattern}
         minLength={min}
