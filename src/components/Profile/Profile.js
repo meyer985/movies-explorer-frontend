@@ -11,12 +11,16 @@ function Profile(props) {
         <h1 className="profile__header">Привет, Виталий!</h1>
         <form className="profile__form edit">
           <labe className="edit__label">Имя</labe>
-          <input type="text" className="edit__input" placeholder="Виталий" />
+          <input
+            type="text"
+            className="edit__input input"
+            placeholder="Виталий"
+          />
           <div className="edit__underline"></div>
           <labe className="edit__label">E-mail</labe>
           <input
             type="text"
-            className="edit__input"
+            className="edit__input input"
             placeholder="pochta@pochta.ru"
           />
         </form>

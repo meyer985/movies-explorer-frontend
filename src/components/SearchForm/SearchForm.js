@@ -4,13 +4,22 @@ import "./SearchForm.css";
 function SearchForm(props) {
   return (
     <section className="search">
-      <form className="search__container">
+      <form id="film-search" className="search__container">
         <div className="search__icon"></div>
-        <input type="text" className="search__input" placeholder="Фильм" />
+        <input
+          type="text"
+          className="search__input input"
+          placeholder="Фильм"
+          required
+        />
         <input type="submit" className="search__btn button" value="" />
       </form>
       <div className="search__checkbox checkbox">
-        <input type="checkbox" className="checkbox__toggle" />
+        <input
+          form="film-search"
+          type="checkbox"
+          className="checkbox__toggle"
+        />
         <div className="checkbox__castom"></div>
 
         <label className="checkbox__label">Короткометражки</label>

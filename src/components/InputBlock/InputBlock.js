@@ -8,7 +8,7 @@ function InputBlock(props) {
       <input
         type={props.type}
         placeholder={props.placeholder}
-        className="input__field"
+        className="input__field input"
       />
       <span className="inut__error-message">Что-то пошло не так...</span>
     </>
