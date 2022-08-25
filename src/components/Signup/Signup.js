@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import InputBlock from "../InputBlock/InputBlock";
 import RegForm from "../RegForm/RegForm";
 import RegisterHeader from "../RegisterHeader/RegisterHeader";
-import api from "../../utils/myApi";
 
 function Signup({ signup }) {
   const [emailValue, setEmailValue] = useState("");

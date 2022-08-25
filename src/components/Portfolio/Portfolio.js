@@ -23,7 +23,7 @@ function Portfolio(props) {
       <ul className="portfolio__list">
         {portfolio.map((item, index) => {
           return (
-            <li className="portfolio__item item" key={index}>
+            <li className="portfolio__item item" key={index + 28}>
               <a
                 className="item__link link"
                 href={item.link}

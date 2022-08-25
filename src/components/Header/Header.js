@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../../images/logo.svg";
 import context from "../../context/context";
@@ -11,23 +12,23 @@ function Header({ isMainPage, isLoggedIn }) {
   return (
     <header className={isMainPage ? "header header_type_main" : "header"}>
       <nav className="header__menu menu">
-        <a href="/" className="menu__logo link">
+        <Link to="/" className="menu__logo link">
           <img src={logo} alt="логотип" />
-        </a>
-        {!isLoggedIn ? (
+        </Link>
+        {!appData.logged ? (
           <span className="header__enter-block enter-block">
-            <a
+            <Link
+              to="/signup"
               className="enter-block__link enter-block__link_type_bold link"
-              href="/signup"
             >
               Регистрация
-            </a>
-            <a
+            </Link>
+            <Link
+              to="/signin"
               className="enter-block__link enter-block__link_type_boxed button"
-              href="/signin"
             >
               Войти
-            </a>
+            </Link>
           </span>
         ) : appData.size > 768 ? (
           <Navigation />

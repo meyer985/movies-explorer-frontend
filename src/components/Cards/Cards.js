@@ -15,7 +15,7 @@ function Cards({ data, isSaved }) {
                 duration={film.duration}
                 isSaved={isSaved}
                 link={film.trailerLink}
-                key={film.id}
+                key={index}
               />
             );
           })}

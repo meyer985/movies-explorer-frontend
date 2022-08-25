@@ -1,5 +1,6 @@
 import React from "react";
 import "./RegForm.css";
+import { Link } from "react-router-dom";
 
 function RegForm({
   children,
@@ -30,9 +31,9 @@ function RegForm({
 
       <p className="reg-form__caption">
         {caption}
-        <a href={href} className=" reg-form__caption reg-form__link link">
+        <Link to={href} className=" reg-form__caption reg-form__link link">
           {link}
-        </a>
+        </Link>
       </p>
     </form>
   );

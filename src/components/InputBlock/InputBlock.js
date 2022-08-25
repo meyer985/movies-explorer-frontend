@@ -33,7 +33,6 @@ function InputBlock({
           getValue(e.target.name, e.target.value);
         }}
       />
-      <span className="inut__error-message">{errorMessage}</span>
     </>
   );
 }

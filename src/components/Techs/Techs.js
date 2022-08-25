@@ -16,7 +16,7 @@ function Techs(props) {
       <div className="tech__container">
         {techs.map((item, index) => {
           return (
-            <div className="tech__item" key={index}>
+            <div className="tech__item" key={index + 15}>
               {item}
             </div>
           );

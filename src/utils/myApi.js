@@ -23,7 +23,25 @@ class MyApi {
 
   auth() {
     const jwt = this._getJWT();
-    return fetch(``);
+
+    return fetch(`${this.BASE_URL}/users/me`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${jwt}`,
+      },
+    });
+  }
+
+  updateUser(data) {
+    return fetch(`${this.BASE_URL}/users/me`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${this._getJWT()}`,
+      },
+      body: JSON.stringify(data),
+    });
   }
 
   _getJWT() {

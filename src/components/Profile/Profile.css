@@ -21,6 +21,15 @@
   min-width: 410px;
 }
 
+.edit__error {
+  grid-column: span 2;
+  max-width: 410px;
+}
+
+.edit__error_hidden {
+  display: none;
+}
+
 .edit__underline {
   border-top: 1px solid #424242;
   grid-column: span 2;
@@ -37,6 +46,7 @@
   font-size: 11px;
   line-height: 1.18;
   text-align: end;
+  color: white;
 }
 
 .profile__button {
@@ -56,10 +66,15 @@
 }
 
 .profile__button_type_save {
-  background-color: #2f2f2f;
+  background-color: #4285f4;
   border-radius: 6px;
   height: 36px;
   min-width: 410px;
+}
+
+.edit:invalid + .profile__button_type_save {
+  background-color: #2f2f2f;
+  pointer-events: none;
 }
 
 @media screen and (max-width: 800px) {

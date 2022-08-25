@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
 import Landing from "../Landing/Landing";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -14,7 +14,42 @@ import api from "../../utils/myApi";
 function App() {
   const navigation = useNavigate();
   const [windowSize, setWindowSize] = useState(window.innerWidth);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const [user, setUser] = useState({});
+
+  function logIn() {
+    setIsLoggedIn(true);
+  }
+
+  function logOut() {
+    console.log("going out");
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    navigation("/");
+  }
+
+  function checkToken() {
+    const jwt = localStorage.getItem("token");
+    if (!jwt) {
+      setIsLoggedIn(false);
+      console.log("токен не найден");
+      return;
+    } else {
+      api
+        .auth()
+        .then((res) =>
+          res.ok ? res.json() : Promise.reject("Ошибка проверки токена")
+        )
+        .then((res) => {
+          setUser(res.data);
+          setIsLoggedIn(true);
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsLoggedIn(false);
+        });
+    }
+  }
 
   /*отслеживаю размер окна*/
   function windowResize() {
@@ -26,6 +61,11 @@ function App() {
     return () => {
       window.removeEventListener("resize", windowResize);
     };
+  }, []);
+
+  /*авторизация*/
+  useEffect(() => {
+    checkToken();
   }, []);
 
   /*регистрация пользователя*/
@@ -69,18 +109,36 @@ function App() {
   function loginUser(data) {
     api
       .login(data)
+      .then((res) => {
+        return res.ok ? res.json() : Promise.reject("ошибка авторизации");
+      })
+      .then((res) => {
+        localStorage.setItem("token", res.jwt);
+        setIsLoggedIn(true);
+        navigation("/movies");
+      })
+      .catch((err) => console.log(err));
+  }
+
+  /*обновление данных пользователя*/
+  function updateUser(data) {
+    api
+      .updateUser(data)
       .then((res) => res.json())
-      .then((res) => console.log(res))
+      .then((data) => {
+        const { name, email } = data.data;
+        setUser({ name, email });
+      })
       .catch((err) => console.log(err));
   }
 
   return (
-    <context.Provider value={{ size: windowSize }}>
+    <context.Provider value={{ size: windowSize, logged: isLoggedIn }}>
       <>
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route
-            path="/movies"
+            path="movies"
             element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
                 <Movies />
@@ -88,7 +146,7 @@ function App() {
             }
           />
           <Route
-            path="/saved-movies"
+            path="saved-movies"
             element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
                 <SavedMovies />
@@ -96,15 +154,27 @@ function App() {
             }
           />
           <Route
-            path="/profile"
+            path="profile"
             element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
-                <Profile />
+                <Profile logout={logOut} user={user} update={updateUser} />
               </ProtectedRoute>
             }
           />
-          <Route path="/signin" element={<Signin signin={loginUser} />} />
-          <Route path="/signup" element={<Signup signup={addUser} />} />
+
+          <Route
+            path="signin"
+            element={
+              !isLoggedIn ? <Signin signin={loginUser} /> : <Navigate to="/" />
+            }
+          />
+          <Route
+            path="signup"
+            element={
+              !isLoggedIn ? <Signup signup={addUser} /> : <Navigate to="/" />
+            }
+          />
+
           <Route path="*" element={<NotFound history={navigation} />} />
         </Routes>
       </>
