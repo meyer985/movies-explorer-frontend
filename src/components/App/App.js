@@ -28,6 +28,11 @@ function App() {
     navigation("/");
   }
 
+  /*авторизация*/
+  useEffect(() => {
+    checkToken();
+  }, []);
+
   function checkToken() {
     const jwt = localStorage.getItem("token");
     if (!jwt) {
@@ -35,7 +40,7 @@ function App() {
       console.log("токен не найден");
       return;
     } else {
-      api
+      return api
         .auth()
         .then((res) =>
           res.ok ? res.json() : Promise.reject("Ошибка проверки токена")
@@ -81,26 +86,27 @@ function App() {
         }
       })
       .then((res) => {
-        api
-          .login({ email: data.email, password: data.password })
-          .then((res) => {
-            if (res.ok) {
-              return res.json();
-            } else {
-              console.log("Произошла ошибка");
-              return;
-            }
-          })
-          .then((res) => {
-            if (res.jwt) {
-              localStorage.setItem("token", res.jwt);
-              setIsLoggedIn(true);
-              navigation("/movies");
-            } else {
-              console.log("Ошибка авторизации");
-            }
-          })
-          .catch((err) => console.log(err));
+        loginUser({ email: data.email, password: data.password });
+        // api
+        //   .login({ email: data.email, password: data.password })
+        //   .then((res) => {
+        //     if (res.ok) {
+        //       return res.json();
+        //     } else {
+        //       console.log("Произошла ошибка");
+        //       return;
+        //     }
+        //   })
+        //   .then((res) => {
+        //     if (res.jwt) {
+        //       localStorage.setItem("token", res.jwt);
+        //       setIsLoggedIn(true);
+        //       navigation("/movies");
+        //     } else {
+        //       console.log("Ошибка авторизации");
+        //     }
+        //   })
+        //   .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   }
@@ -114,8 +120,11 @@ function App() {
       })
       .then((res) => {
         localStorage.setItem("token", res.jwt);
-        setIsLoggedIn(true);
-        navigation("/movies");
+      })
+      .then(() => {
+        checkToken()
+          .then(() => navigation("movies"))
+          .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   }
