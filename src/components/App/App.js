@@ -22,7 +22,6 @@ function App() {
   }
 
   function logOut() {
-    console.log("going out");
     localStorage.removeItem("token");
     setIsLoggedIn(false);
     navigation("/");
@@ -85,28 +84,8 @@ function App() {
           return;
         }
       })
-      .then((res) => {
+      .then(() => {
         loginUser({ email: data.email, password: data.password });
-        // api
-        //   .login({ email: data.email, password: data.password })
-        //   .then((res) => {
-        //     if (res.ok) {
-        //       return res.json();
-        //     } else {
-        //       console.log("Произошла ошибка");
-        //       return;
-        //     }
-        //   })
-        //   .then((res) => {
-        //     if (res.jwt) {
-        //       localStorage.setItem("token", res.jwt);
-        //       setIsLoggedIn(true);
-        //       navigation("/movies");
-        //     } else {
-        //       console.log("Ошибка авторизации");
-        //     }
-        //   })
-        //   .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   }
