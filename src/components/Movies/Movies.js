@@ -70,7 +70,6 @@ function Movies(props) {
     setToggle(bool);
   }
 
-  /*---------------------------------*/
   /*******Логика кнопки еще************/
 
   function getIncrement() {
