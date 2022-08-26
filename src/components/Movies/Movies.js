@@ -67,9 +67,7 @@ function Movies(props) {
   }
 
   function changeDuration(bool) {
-    getIncrement();
     setToggle(bool);
-    console.log(toggle);
   }
 
   /*---------------------------------*/
@@ -86,10 +84,6 @@ function Movies(props) {
       setIncrement(5);
     }
   }
-
-  // useEffect(() => {
-  //   getIncrement();
-  // }, []);
 
   useEffect(() => {
     if (toggle) {
