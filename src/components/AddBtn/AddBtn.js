@@ -7,7 +7,7 @@ function AddBtn(props) {
       <button
         type="button"
         className="add-btn__button button"
-        onClick={props.clearStorage}
+        onClick={props.addMovies}
       >
         Ещё
       </button>

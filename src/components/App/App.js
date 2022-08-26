@@ -58,6 +58,7 @@ function App() {
   /*отслеживаю размер окна*/
   function windowResize() {
     setWindowSize(window.innerWidth);
+    // setTimeout(() => setWindowSize(window.innerWidth), 1000);
   }
 
   useEffect(() => {

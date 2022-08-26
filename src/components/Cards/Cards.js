@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Cards.css";
 import Card from "../Card/Card";
+import context from "../../context/context";
 
 function Cards({ data, isSaved }) {
   return (
