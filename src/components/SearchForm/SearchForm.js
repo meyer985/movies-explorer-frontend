@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SearchForm.css";
 
-function SearchForm({ searchRequest }) {
+function SearchForm({ searchRequest, changeToggle }) {
   const [searchValue, setSearchvalue] = useState("");
   const [checkbox, setCheckbox] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -16,6 +16,7 @@ function SearchForm({ searchRequest }) {
         id="film-search"
         className="search__container"
         onSubmit={handleSubmit}
+        noValidate
       >
         <div className="search__icon"></div>
         <input
@@ -23,7 +24,6 @@ function SearchForm({ searchRequest }) {
           className="search__input input"
           placeholder="Фильм"
           required
-          formNoValidate
           value={searchValue}
           onChange={(e) => {
             setErrorMessage(e.target.validationMessage);
@@ -39,7 +39,10 @@ function SearchForm({ searchRequest }) {
           type="checkbox"
           className="checkbox__toggle"
           value={checkbox}
-          onChange={() => setCheckbox(!checkbox)}
+          onChange={() => {
+            setCheckbox(!checkbox);
+            changeToggle();
+          }}
         />
         <div className="checkbox__castom"></div>
 

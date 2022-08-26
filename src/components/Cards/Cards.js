@@ -5,7 +5,7 @@ import Card from "../Card/Card";
 function Cards({ data, isSaved }) {
   return (
     <section className="cards">
-      {data ? (
+      {data.length > 0 ? (
         <ul className="cards__list">
           {data.map((film, index) => {
             return (
