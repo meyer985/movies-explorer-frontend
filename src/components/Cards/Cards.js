@@ -3,7 +3,7 @@ import "./Cards.css";
 import Card from "../Card/Card";
 import context from "../../context/context";
 
-function Cards({ data, isSaved }) {
+function Cards({ data, isLiked, handleLike }) {
   return (
     <section className="cards">
       {data.length > 0 ? (
@@ -11,12 +11,15 @@ function Cards({ data, isSaved }) {
           {data.map((film, index) => {
             return (
               <Card
+                id={film.id || film._id}
                 name={film.nameRU}
-                image={film.image.url}
+                image={film._id ? film.image : film.image.url}
                 duration={film.duration}
-                isSaved={isSaved}
+                isSaved={Boolean(film._id)}
+                isLiked={film.isLiked}
                 link={film.trailerLink}
                 key={index}
+                handleLike={handleLike}
               />
             );
           })}

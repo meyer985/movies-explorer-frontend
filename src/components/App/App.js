@@ -10,6 +10,8 @@ import NotFound from "../NotFound/NotFound";
 import context from "../../context/context";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import api from "../../utils/myApi";
+import getMovies from "../../utils/sideApi";
+import { textSearch, timeSearch } from "../../utils/searchFilms";
 
 function App() {
   const navigation = useNavigate();
@@ -121,6 +123,164 @@ function App() {
       .catch((err) => console.log(err));
   }
 
+  /*загрузка списка фильмов*/
+
+  const [movies, setMovies] = useState([]);
+  const [toggle, setToggle] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
+  const [myMovies, setMyMovies] = useState([]);
+
+  //* подгружаем сохраненный результат из локал стораджа*//
+
+  function loadSavedSearch(data) {
+    setMovies(data.moviesList);
+    setToggle(data.toggle);
+  }
+
+  function saveResult(movies, toggle) {
+    localStorage.setItem(
+      "searchResult",
+      JSON.stringify({
+        moviesList: movies,
+        toggle: toggle,
+      })
+    );
+  }
+
+  /* загрузка общего списка фильмов*/
+  async function loadMovies() {
+    let moviesList = JSON.parse(localStorage.getItem("movies"));
+    if (!moviesList) {
+      const load = await getMovies();
+      localStorage.setItem("movies", JSON.stringify(load));
+      moviesList = load;
+    }
+    const updatedList = moviesList;
+    return updatedList;
+  }
+
+  async function showMovies(req) {
+    setisLoading(true);
+    const moviesList = await loadMovies();
+    const sortedByName = textSearch(moviesList, req.value);
+    const likedUnlikedList = arrangeMovies(sortedByName);
+    setMovies(likedUnlikedList);
+    saveResult(sortedByName, toggle);
+    req.shortMetre ? setToggle(true) : setToggle(false);
+    setisLoading(false);
+  }
+
+  function arrangeMovies(list) {
+    const selectMyLikes = list.map((film) => {
+      if (myMovies.some((movie) => movie.movieId === film.id)) {
+        film.isLiked = true;
+      } else {
+        film.isLiked = false;
+      }
+      return film;
+    });
+    return selectMyLikes;
+  }
+
+  function changeDuration(bool) {
+    setToggle(bool);
+  }
+
+  /*-----------ЛАЙК------------*/
+
+  useEffect(() => {
+    api
+      .getSavedMovies()
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then((data) => {
+        if (data) {
+          setMyMovies(data.data);
+        }
+      });
+  }, []);
+
+  function toggleLike(key, state) {
+    if (state === undefined) {
+      deliteCard(key);
+    } else if (state) {
+      removeLike(key);
+    } else {
+      putLike(key);
+    }
+  }
+
+  function deliteCard(id) {
+    api
+      .deleteMovie(id)
+      .then((res) => res.json())
+      .then((data) => {
+        const updatedList = movies.map((item) => {
+          if (item.id === data.data.movieId) {
+            item.isLiked = false;
+          }
+          return item;
+        });
+        setMovies(updatedList);
+        saveResult(
+          updatedList,
+          JSON.parse(localStorage.getItem("searchResult")).toggle
+        );
+
+        setMyMovies(myMovies.filter((item) => item._id !== data.data._id));
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function removeLike(id) {
+    api
+      .deleteMovie(myMovies.find((item) => item.movieId === id)._id)
+      .then((res) => res.json())
+      .then((data) => {
+        setMyMovies(myMovies.filter((item) => item._id !== data.data._id));
+        const updatedList = movies.map((item) => {
+          if (item.id === id) {
+            item.isLiked = false;
+          }
+          return item;
+        });
+        setMovies(updatedList);
+        saveResult(
+          updatedList,
+          JSON.parse(localStorage.getItem("searchResult")).toggle
+        );
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function putLike(id) {
+    api
+      .postMovie(movies.find((item) => item.id === id))
+      .then((res) => res.json())
+      .then((data) => {
+        setMyMovies(myMovies.concat(data.data));
+      })
+      .then(() => {
+        const updatedList = movies.map((item) => {
+          if (item.id === id) {
+            item.isLiked = true;
+          }
+          return item;
+        });
+        setMovies(updatedList);
+        saveResult(
+          updatedList,
+          JSON.parse(localStorage.getItem("searchResult")).toggle
+        );
+      })
+      .catch((err) => console.log(err));
+  }
+
+  /********************** */
+
   return (
     <context.Provider value={{ size: windowSize, logged: isLoggedIn }}>
       <>
@@ -130,7 +290,17 @@ function App() {
             path="movies"
             element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
-                <Movies />
+                <Movies
+                  getMovies={showMovies}
+                  isLoading={isLoading}
+                  toggle={toggle}
+                  data={
+                    !toggle ? movies : movies.filter((f) => f.duration < 41)
+                  }
+                  changeDuration={changeDuration}
+                  handleLike={toggleLike}
+                  loadSaved={loadSavedSearch}
+                />
               </ProtectedRoute>
             }
           />
@@ -138,7 +308,11 @@ function App() {
             path="saved-movies"
             element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
-                <SavedMovies />
+                <SavedMovies
+                  data={myMovies}
+                  changeToggle={changeDuration}
+                  handleLike={toggleLike}
+                />
               </ProtectedRoute>
             }
           />

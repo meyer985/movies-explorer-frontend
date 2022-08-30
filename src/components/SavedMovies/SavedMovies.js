@@ -6,13 +6,13 @@ import SearchForm from "../SearchForm/SearchForm";
 import Main from "../Main/Main";
 import films from "../films";
 
-function SavedMovies(props) {
+function SavedMovies({ data, changeToggle, handleLike }) {
   return (
     <>
       <Header isLoggedIn={true} />
       <Main>
-        <SearchForm />
-        <Cards data={films[1]} isSaved={true} />
+        <SearchForm changeToggle={changeToggle} />
+        <Cards data={data} isSaved={true} handleLike={handleLike} />
       </Main>
       <Footer />
     </>

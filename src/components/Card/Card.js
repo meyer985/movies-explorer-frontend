@@ -1,7 +1,20 @@
 import React from "react";
 import "./Card.css";
 
-function Card({ image, name, duration, link, isSaved }) {
+function Card({
+  image,
+  name,
+  duration,
+  link,
+  isSaved,
+  isLiked,
+  handleLike,
+  id,
+}) {
+  function changeLike() {
+    isSaved ? handleLike(id, isLiked) : handleLike(id, isLiked);
+  }
+
   const getDuration = (duration) => {
     return duration < 61
       ? `${duration}m`
@@ -17,7 +30,7 @@ function Card({ image, name, duration, link, isSaved }) {
       >
         <img
           className="card__image"
-          src={`https://api.nomoreparties.co/${image}`}
+          src={isSaved ? image : `https://api.nomoreparties.co/${image}`}
           alt={name}
         />
       </a>
@@ -25,11 +38,14 @@ function Card({ image, name, duration, link, isSaved }) {
       <div className="card__capture">
         <p className="card__name">{name} </p>
         <button
+          onClick={changeLike}
           type="button"
           className={
             isSaved
               ? `card__button card__button_type_remove button`
-              : `card__button card__button_type_liked button`
+              : isLiked
+              ? `card__button card__button_type_liked button`
+              : `card__button card__button_type_like button`
           }
         />
       </div>

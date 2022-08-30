@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./SearchForm.css";
 
-function SearchForm({ searchRequest, changeToggle }) {
+function SearchForm({ searchRequest, changeToggle, toggle }) {
   const [searchValue, setSearchValue] = useState("");
   const [checkbox, setCheckbox] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -25,8 +25,8 @@ function SearchForm({ searchRequest, changeToggle }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    saveRequest(searchValue);
-    saveToggle(checkbox);
+    // saveRequest(searchValue);
+    // saveToggle(checkbox);
     searchRequest({ value: searchValue, shortMetre: checkbox });
   }
 
@@ -46,13 +46,7 @@ function SearchForm({ searchRequest, changeToggle }) {
         onSubmit={handleSubmit}
         noValidate
       >
-        <div
-          className="search__icon"
-          onClick={() => {
-            localStorage.removeItem("toggle");
-            console.log(localStorage.getItem("toggle"));
-          }}
-        ></div>
+        <div className="search__icon"></div>
         <input
           type="text"
           className="search__input input"
@@ -62,6 +56,7 @@ function SearchForm({ searchRequest, changeToggle }) {
           onChange={(e) => {
             setErrorMessage(e.target.validationMessage);
             setSearchValue(e.target.value);
+            saveRequest(e.target.value);
           }}
         />
         <input type="submit" className="search__btn button" value="" />

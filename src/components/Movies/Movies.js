@@ -5,102 +5,43 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import Main from "../Main/Main";
-import getMovies from "../../utils/sideApi";
 import Preloader from "../Preloader/Preloader";
-import { textSearch, timeSearch } from "../../utils/searchFilms";
 import context from "../../context/context";
 
-function Movies(props) {
+function Movies({
+  getMovies,
+  isLoading,
+  data,
+  changeDuration,
+  handleLike,
+  loadSaved,
+  toggle,
+}) {
   const windowSize = useContext(context).size;
-  const [increment, setIncrement] = useState(0);
-  const [movies, setMovies] = useState([]);
-  const [shorts, setShorts] = useState([]);
-  const [toggle, setToggle] = useState(false);
-  const [isLoading, setisLoading] = useState(false);
-  const [buttonHidden, setButtonHidden] = useState(false);
-  const shortPortion = shorts.slice(0, increment);
-  const moviesPortion = movies.slice(0, increment);
+  const [increment, setIncrement] = useState(getIncrement);
 
   /*загрузка сохраненных результатов поиска*/
   useEffect(() => {
-    getIncrement();
     const savedResult = JSON.parse(localStorage.getItem("searchResult"));
     if (savedResult) {
-      setMovies(savedResult.moviesList);
-      setShorts(savedResult.shortsList);
+      loadSaved({
+        moviesList: savedResult.moviesList,
+        toggle: savedResult.toggle,
+      });
     }
   }, []);
 
-  /* загрузка общего списка фильмов*/
-  async function loadMovies() {
-    let moviesList = JSON.parse(localStorage.getItem("movies"));
-    if (!moviesList) {
-      const load = await getMovies();
-      localStorage.setItem("movies", JSON.stringify(load));
-      moviesList = load;
-    }
-    return moviesList;
-  }
-
-  function saveResult(all, shorts) {
-    localStorage.setItem(
-      "searchResult",
-      JSON.stringify({
-        moviesList: all,
-        shortsList: shorts,
-      })
-    );
-  }
-
-  async function showMovies(req) {
-    console.log(req);
-    setisLoading(true);
-    getIncrement();
-    const moviesList = await loadMovies();
-    const sortByName = textSearch(moviesList, req.value);
-    const sortByLength = timeSearch(sortByName);
-    setMovies(sortByName);
-    setShorts(sortByLength);
-    saveResult(sortByName, sortByLength);
-    req.shortMetre ? setToggle(true) : setToggle(false);
-    setisLoading(false);
-  }
-
-  function changeDuration(bool) {
-    setToggle(bool);
-  }
-
-  /*******Логика кнопки еще************/
-
   function getIncrement() {
     if (windowSize > 1124) {
-      setIncrement(16);
+      return 16;
     } else if (windowSize > 800 && windowSize < 1125) {
-      setIncrement(12);
+      return 12;
     } else if (windowSize > 500 && windowSize < 801) {
-      setIncrement(8);
+      return 8;
     } else {
-      setIncrement(5);
+      return 5;
     }
   }
-
-  useEffect(() => {
-    if (toggle) {
-      shorts.length === shortPortion.length
-        ? setButtonHidden(true)
-        : setButtonHidden(false);
-    } else {
-      movies.length === moviesPortion.length
-        ? setButtonHidden(true)
-        : setButtonHidden(false);
-    }
-  }, [
-    movies.length,
-    moviesPortion.length,
-    shorts.length,
-    shortPortion.length,
-    toggle,
-  ]);
 
   function changeIncrement() {
     if (windowSize > 1124) {
@@ -116,17 +57,30 @@ function Movies(props) {
     changeIncrement();
   }
 
+  function getNewSearch(req) {
+    setIncrement(getIncrement());
+    getMovies(req);
+  }
+
   return (
     <>
       <Header isLoggedIn={true} />
       <Main>
-        <SearchForm searchRequest={showMovies} changeToggle={changeDuration} />
+        <SearchForm
+          searchRequest={getNewSearch}
+          changeToggle={changeDuration}
+          toggle={toggle}
+        />
         {isLoading ? (
           <Preloader />
         ) : (
-          <Cards data={toggle ? shortPortion : moviesPortion} />
+          <Cards
+            data={data.slice(0, increment)}
+            isSaved={false}
+            handleLike={handleLike}
+          />
         )}
-        {!buttonHidden && <AddBtn addMovies={addMovies} />}
+        {data.length > increment && <AddBtn addMovies={addMovies} />}
       </Main>
       <Footer />
     </>
