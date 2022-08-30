@@ -11,23 +11,42 @@ import context from "../../context/context";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import api from "../../utils/myApi";
 import getMovies from "../../utils/sideApi";
-import { textSearch, timeSearch } from "../../utils/searchFilms";
+import { textSearch } from "../../utils/searchFilms";
+import Error from "../Error/Error";
 
 function App() {
-  console.log("render app");
   const navigation = useNavigate();
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [user, setUser] = useState({});
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [success, setSuccess] = useState(false);
 
   function logIn() {
     setIsLoggedIn(true);
   }
 
   function logOut() {
-    localStorage.removeItem("token");
+    localStorage.clear();
     setIsLoggedIn(false);
     navigation("/");
+  }
+
+  function showError(err) {
+    setError(true);
+    setErrorMessage(JSON.parse(err.message).message);
+    setTimeout(() => {
+      setError(false);
+      setErrorMessage("");
+    }, 3000);
+  }
+
+  function showSuccess() {
+    setSuccess(true);
+    setTimeout(() => {
+      setSuccess(false);
+    }, 3000);
   }
 
   /*авторизация*/
@@ -39,20 +58,16 @@ function App() {
     const jwt = localStorage.getItem("token");
     if (!jwt) {
       setIsLoggedIn(false);
-      console.log("токен не найден");
       return;
     } else {
       return api
         .auth()
-        .then((res) =>
-          res.ok ? res.json() : Promise.reject("Ошибка проверки токена")
-        )
         .then((res) => {
           setUser(res.data);
           setIsLoggedIn(true);
         })
         .catch((err) => {
-          console.log(err);
+          showError(err);
           setIsLoggedIn(false);
         });
     }
@@ -60,8 +75,7 @@ function App() {
 
   /*отслеживаю размер окна*/
   function windowResize() {
-    setWindowSize(window.innerWidth);
-    // setTimeout(() => setWindowSize(window.innerWidth), 1000);
+    setTimeout(() => setWindowSize(window.innerWidth), 1000);
   }
 
   useEffect(() => {
@@ -71,27 +85,14 @@ function App() {
     };
   }, []);
 
-  /*авторизация*/
-  useEffect(() => {
-    checkToken();
-  }, []);
-
   /*регистрация пользователя*/
   function addUser(data) {
     api
       .addUser(data)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          console.log("Произошла ошибка");
-          return;
-        }
-      })
       .then(() => {
         loginUser({ email: data.email, password: data.password });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => showError(err));
   }
 
   /*авторизация по логин-паролю*/
@@ -99,29 +100,26 @@ function App() {
     api
       .login(data)
       .then((res) => {
-        return res.ok ? res.json() : Promise.reject("ошибка авторизации");
-      })
-      .then((res) => {
         localStorage.setItem("token", res.jwt);
       })
       .then(() => {
         checkToken()
           .then(() => navigation("movies"))
-          .catch((err) => console.log(err));
+          .catch((err) => console.log(err.message));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => showError(err));
   }
 
   /*обновление данных пользователя*/
   function updateUser(data) {
     api
       .updateUser(data)
-      .then((res) => res.json())
       .then((data) => {
         const { name, email } = data.data;
         setUser({ name, email });
+        showSuccess();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => showError(err));
   }
 
   /*загрузка списка фильмов*/
@@ -263,7 +261,9 @@ function App() {
   /********************** */
 
   return (
-    <context.Provider value={{ size: windowSize, logged: isLoggedIn }}>
+    <context.Provider
+      value={{ size: windowSize, logged: isLoggedIn, user: user }}
+    >
       <>
         <Routes>
           <Route path="/" element={<Landing />} />
@@ -293,7 +293,14 @@ function App() {
             path="profile"
             element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
-                <Profile logout={logOut} user={user} update={updateUser} />
+                <Profile
+                  logout={logOut}
+                  user={user}
+                  update={updateUser}
+                  isError={error}
+                  errorMessage={errorMessage}
+                  isSuccess={success}
+                />
               </ProtectedRoute>
             }
           />
@@ -301,18 +308,35 @@ function App() {
           <Route
             path="signin"
             element={
-              !isLoggedIn ? <Signin signin={loginUser} /> : <Navigate to="/" />
+              !isLoggedIn ? (
+                <Signin
+                  signin={loginUser}
+                  isError={error}
+                  errorMessage={errorMessage}
+                />
+              ) : (
+                <Navigate to="/" />
+              )
             }
           />
           <Route
             path="signup"
             element={
-              !isLoggedIn ? <Signup signup={addUser} /> : <Navigate to="/" />
+              !isLoggedIn ? (
+                <Signup
+                  signup={addUser}
+                  isError={error}
+                  errorMessage={errorMessage}
+                />
+              ) : (
+                <Navigate to="/" />
+              )
             }
           />
 
           <Route path="*" element={<NotFound history={navigation} />} />
         </Routes>
+        {/* {error && <Error message={errorMessage} />} */}
       </>
     </context.Provider>
   );

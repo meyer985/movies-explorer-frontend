@@ -10,7 +10,13 @@ class MyApi {
       method: "POST",
       headers: this.headers,
       body: JSON.stringify(data),
-    });
+    }).then((res) =>
+      res.ok
+        ? res.json()
+        : res.text().then((text) => {
+            throw new Error(text);
+          })
+    );
   }
 
   login(data) {
@@ -18,7 +24,13 @@ class MyApi {
       method: "POST",
       headers: this.headers,
       body: JSON.stringify(data),
-    });
+    }).then((res) =>
+      res.ok
+        ? res.json()
+        : res.text().then((text) => {
+            throw new Error(text);
+          })
+    );
   }
 
   auth() {
@@ -30,7 +42,13 @@ class MyApi {
         "content-type": "application/json",
         authorization: `Bearer ${jwt}`,
       },
-    });
+    }).then((res) =>
+      res.ok
+        ? res.json()
+        : res.text().then((text) => {
+            throw new Error(text);
+          })
+    );
   }
 
   updateUser(data) {
@@ -41,7 +59,13 @@ class MyApi {
         authorization: `Bearer ${this._getJWT()}`,
       },
       body: JSON.stringify(data),
-    });
+    }).then((res) =>
+      res.ok
+        ? res.json()
+        : res.text().then((text) => {
+            throw new Error(text);
+          })
+    );
   }
 
   getSavedMovies() {

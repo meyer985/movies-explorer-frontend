@@ -3,7 +3,7 @@ import RegForm from "../RegForm/RegForm";
 import InputBlock from "../InputBlock/InputBlock";
 import RegisterHeader from "../RegisterHeader/RegisterHeader";
 
-function Signin({ signin }) {
+function Signin({ signin, isError, errorMessage }) {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
 
@@ -28,6 +28,8 @@ function Signin({ signin }) {
         href={"/signup"}
         shortForm={true}
         formSubmit={handleSubmit}
+        isError={isError}
+        errorMessage={errorMessage}
       >
         <InputBlock
           type={"email"}

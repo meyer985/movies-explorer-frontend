@@ -29,6 +29,11 @@
   padding-top: 16px;
 }
 
+.reg-form__error {
+  color: #ee3465;
+  font-weight: 500;
+}
+
 .reg-form__link {
   color: #4285f4;
   margin: 0;

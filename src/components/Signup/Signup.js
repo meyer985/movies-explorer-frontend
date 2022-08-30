@@ -3,7 +3,7 @@ import InputBlock from "../InputBlock/InputBlock";
 import RegForm from "../RegForm/RegForm";
 import RegisterHeader from "../RegisterHeader/RegisterHeader";
 
-function Signup({ signup }) {
+function Signup({ signup, isError, errorMessage }) {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [nameValue, setNameValue] = useState("");
@@ -32,6 +32,8 @@ function Signup({ signup }) {
         link="Войти"
         href="/signin"
         formSubmit={handleSubmit}
+        isError={isError}
+        errorMessage={errorMessage}
       >
         <InputBlock
           type="text"

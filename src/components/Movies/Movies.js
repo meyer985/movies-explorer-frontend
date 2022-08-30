@@ -9,15 +9,7 @@ import Preloader from "../Preloader/Preloader";
 import context from "../../context/context";
 import { timeSearch } from "../../utils/searchFilms";
 
-function Movies({
-  getMovies,
-  isLoading,
-  data,
-  // changeDuration,
-  handleLike,
-  loadSaved,
-  toggle,
-}) {
+function Movies({ getMovies, isLoading, data, handleLike, loadSaved, toggle }) {
   const windowSize = useContext(context).size;
   const [increment, setIncrement] = useState(getIncrement);
   const [searchValue, setSearchValue] = useState("");
@@ -25,10 +17,8 @@ function Movies({
 
   /*загрузка сохраненных результатов поиска*/
   useEffect(() => {
-    console.log("render movie, load last search");
     const savedResult = JSON.parse(localStorage.getItem("searchResult"));
     if (savedResult) {
-      console.log("загружается из хранилища");
       loadSaved(savedResult);
     }
 

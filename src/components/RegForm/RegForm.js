@@ -10,6 +10,8 @@ function RegForm({
   link,
   shortForm,
   formSubmit,
+  isError,
+  errorMessage,
 }) {
   return (
     <form
@@ -29,12 +31,16 @@ function RegForm({
         formNoValidate
       />
 
-      <p className="reg-form__caption">
-        {caption}
-        <Link to={href} className=" reg-form__caption reg-form__link link">
-          {link}
-        </Link>
-      </p>
+      {isError ? (
+        <p className="reg-form__caption reg-form__error">{errorMessage}</p>
+      ) : (
+        <p className="reg-form__caption">
+          {caption}
+          <Link to={href} className=" reg-form__caption reg-form__link link">
+            {link}
+          </Link>
+        </p>
+      )}
     </form>
   );
 }

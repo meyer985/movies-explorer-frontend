@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Header from "../Header/Header";
 import "./Profile.css";
+import context from "../../context/context";
 
 function Profile(props) {
+  const user = useContext(context).user;
   const [isUpdating, setIsUpdating] = useState(false);
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [name, setName] = useState(props.user.name);
-  const [email, setEmail] = useState(props.user.email);
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
 
   function handleLogout() {
     props.logout();
@@ -32,7 +34,9 @@ function Profile(props) {
     <>
       <Header isLoggedIn={true} />
       <main className="profile">
-        <h1 className="profile__header">Привет, {props.user.name}!</h1>
+        <h1 onClick={() => console.log(user)} className="profile__header">
+          Привет, {user.name}!
+        </h1>
         <form
           className="profile__form edit"
           id="edit-form"
@@ -82,7 +86,11 @@ function Profile(props) {
               value="Сохранить"
               type="submit"
               form="edit-form"
-              className="profile__button profile__button_type_edit profile__button_type_save  button"
+              className={`profile__button profile__button_type_edit profile__button_type_save  button ${
+                name === user.name && email === user.email
+                  ? "profile__button_type_inactive"
+                  : ""
+              }`}
             />
 
             <button
@@ -110,6 +118,11 @@ function Profile(props) {
               Выйти из аккаунта
             </button>
           </>
+        )}
+        {props.isError && (
+          <p className="reg-form__caption reg-form__error">
+            {props.errorMessage}
+          </p>
         )}
       </main>
     </>
