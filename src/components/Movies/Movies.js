@@ -25,7 +25,7 @@ function Movies({
 
   /*загрузка сохраненных результатов поиска*/
   useEffect(() => {
-    // console.log("render movie, load last search");
+    console.log("render movie, load last search");
     const savedResult = JSON.parse(localStorage.getItem("searchResult"));
     if (savedResult) {
       console.log("загружается из хранилища");
@@ -81,20 +81,16 @@ function Movies({
     );
   }
 
-  function changeDuration(bool) {
-    console.log("change");
-    setSearchCheckbox(bool);
-  }
-
   return (
     <>
       <Header isLoggedIn={true} />
       <Main>
         <SearchForm
           searchRequest={getNewSearch}
-          changeToggle={changeDuration}
           toggle={searchCheckbox}
           value={searchValue}
+          changeToggle={(state) => setSearchCheckbox(state)}
+          sendUpInput={(input) => setSearchValue(input)}
         />
         {isLoading ? (
           <Preloader />

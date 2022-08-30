@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "./SearchForm.css";
 
-function SearchForm({ searchRequest, changeToggle, toggle, value }) {
-  const [searchValue, setSearchValue] = useState("");
-  const [checkbox, setCheckbox] = useState(false);
+function SearchForm({
+  searchRequest,
+  changeToggle,
+  toggle,
+  value,
+  sendUpInput,
+}) {
   const [errorMessage, setErrorMessage] = useState("");
-
-  useEffect(() => {
-    console.log("form mount");
-    setCheckbox(toggle);
-    setSearchValue(value);
-  }, [toggle, value]);
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    searchRequest({ value: searchValue, shortMetre: checkbox });
+    searchRequest({ value: value, shortMetre: toggle });
   }
 
   return (
@@ -32,10 +29,10 @@ function SearchForm({ searchRequest, changeToggle, toggle, value }) {
           className="search__input input"
           placeholder="Фильм"
           required
-          value={searchValue}
+          value={value}
           onChange={(e) => {
             setErrorMessage(e.target.validationMessage);
-            setSearchValue(e.target.value);
+            sendUpInput(e.target.value);
           }}
         />
         <input type="submit" className="search__btn button" value="" />
@@ -47,9 +44,8 @@ function SearchForm({ searchRequest, changeToggle, toggle, value }) {
           type="checkbox"
           autoComplete="off"
           className="checkbox__toggle"
-          checked={checkbox}
+          checked={toggle}
           onChange={(e) => {
-            setCheckbox(e.target.checked);
             changeToggle(e.target.checked);
           }}
         />

@@ -43,20 +43,16 @@ function SavedMovies({ data, handleLike }) {
     );
   }
 
-  function changeDuration(bool) {
-    console.log("change");
-    setSearchCheckbox(bool);
-  }
-
   return (
     <>
       <Header isLoggedIn={true} />
       <Main>
         <SearchForm
-          changeToggle={changeDuration}
           searchRequest={handleSearch}
           toggle={searchCheckbox}
           value={searchValue}
+          changeToggle={(state) => setSearchCheckbox(state)}
+          sendUpInput={(input) => setSearchValue(input)}
         />
         <Cards
           data={!searchCheckbox ? myMovies : timeSearch(myMovies)}
