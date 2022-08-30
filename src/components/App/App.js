@@ -126,25 +126,17 @@ function App() {
   /*загрузка списка фильмов*/
 
   const [movies, setMovies] = useState([]);
-  const [toggle, setToggle] = useState(false);
   const [isLoading, setisLoading] = useState(false);
   const [myMovies, setMyMovies] = useState([]);
 
   //* подгружаем сохраненный результат из локал стораджа*//
 
   function loadSavedSearch(data) {
-    setMovies(data.moviesList);
-    setToggle(data.toggle);
+    setMovies(data);
   }
 
-  function saveResult(movies, toggle) {
-    localStorage.setItem(
-      "searchResult",
-      JSON.stringify({
-        moviesList: movies,
-        toggle: toggle,
-      })
-    );
+  function saveResult(movies) {
+    localStorage.setItem("searchResult", JSON.stringify(movies));
   }
 
   /* загрузка общего списка фильмов*/
@@ -165,8 +157,7 @@ function App() {
     const sortedByName = textSearch(moviesList, req.value);
     const likedUnlikedList = arrangeMovies(sortedByName);
     setMovies(likedUnlikedList);
-    saveResult(sortedByName, toggle);
-    req.shortMetre ? setToggle(true) : setToggle(false);
+    saveResult(sortedByName);
     setisLoading(false);
   }
 
@@ -180,10 +171,6 @@ function App() {
       return film;
     });
     return selectMyLikes;
-  }
-
-  function changeDuration(bool) {
-    setToggle(bool);
   }
 
   /*-----------ЛАЙК------------*/
@@ -225,10 +212,7 @@ function App() {
           return item;
         });
         setMovies(updatedList);
-        saveResult(
-          updatedList,
-          JSON.parse(localStorage.getItem("searchResult")).toggle
-        );
+        saveResult(updatedList);
 
         setMyMovies(myMovies.filter((item) => item._id !== data.data._id));
       })
@@ -248,10 +232,7 @@ function App() {
           return item;
         });
         setMovies(updatedList);
-        saveResult(
-          updatedList,
-          JSON.parse(localStorage.getItem("searchResult")).toggle
-        );
+        saveResult(updatedList);
       })
       .catch((err) => console.log(err));
   }
@@ -271,10 +252,7 @@ function App() {
           return item;
         });
         setMovies(updatedList);
-        saveResult(
-          updatedList,
-          JSON.parse(localStorage.getItem("searchResult")).toggle
-        );
+        saveResult(updatedList);
       })
       .catch((err) => console.log(err));
   }
@@ -293,11 +271,7 @@ function App() {
                 <Movies
                   getMovies={showMovies}
                   isLoading={isLoading}
-                  toggle={toggle}
-                  data={
-                    !toggle ? movies : movies.filter((f) => f.duration < 41)
-                  }
-                  changeDuration={changeDuration}
+                  data={movies}
                   handleLike={toggleLike}
                   loadSaved={loadSavedSearch}
                 />
@@ -308,11 +282,7 @@ function App() {
             path="saved-movies"
             element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
-                <SavedMovies
-                  data={myMovies}
-                  changeToggle={changeDuration}
-                  handleLike={toggleLike}
-                />
+                <SavedMovies data={myMovies} handleLike={toggleLike} />
               </ProtectedRoute>
             }
           />

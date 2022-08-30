@@ -7,27 +7,34 @@ import SearchForm from "../SearchForm/SearchForm";
 import Main from "../Main/Main";
 import Preloader from "../Preloader/Preloader";
 import context from "../../context/context";
+import { textSearch, timeSearch } from "../../utils/searchFilms";
 
 function Movies({
   getMovies,
   isLoading,
   data,
-  changeDuration,
+  // changeDuration,
   handleLike,
   loadSaved,
   toggle,
 }) {
   const windowSize = useContext(context).size;
   const [increment, setIncrement] = useState(getIncrement);
+  const [searchValue, setSearchValue] = useState("");
+  const [searchCheckbox, setSearchCheckbox] = useState(false);
 
   /*загрузка сохраненных результатов поиска*/
   useEffect(() => {
+    // console.log("render movie, load last search");
     const savedResult = JSON.parse(localStorage.getItem("searchResult"));
     if (savedResult) {
-      loadSaved({
-        moviesList: savedResult.moviesList,
-        toggle: savedResult.toggle,
-      });
+      loadSaved(savedResult);
+    }
+
+    const searchResult = JSON.parse(localStorage.getItem("reqParams"));
+    if (searchResult) {
+      setSearchValue(searchResult.value);
+      setSearchCheckbox(searchResult.position);
     }
   }, []);
 
@@ -60,6 +67,22 @@ function Movies({
   function getNewSearch(req) {
     setIncrement(getIncrement());
     getMovies(req);
+    saveRequestParams(req);
+  }
+
+  function saveRequestParams(req) {
+    localStorage.setItem(
+      "reqParams",
+      JSON.stringify({
+        value: req.value,
+        position: req.shortMetre,
+      })
+    );
+  }
+
+  function changeDuration(bool) {
+    console.log("change");
+    setSearchCheckbox(bool);
   }
 
   return (
@@ -69,13 +92,18 @@ function Movies({
         <SearchForm
           searchRequest={getNewSearch}
           changeToggle={changeDuration}
-          toggle={toggle}
+          toggle={searchCheckbox}
+          value={searchValue}
         />
         {isLoading ? (
           <Preloader />
         ) : (
           <Cards
-            data={data.slice(0, increment)}
+            data={
+              !searchCheckbox
+                ? data.slice(0, increment)
+                : timeSearch(data).slice(0, increment)
+            }
             isSaved={false}
             handleLike={handleLike}
           />

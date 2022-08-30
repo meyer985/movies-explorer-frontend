@@ -1,41 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "./SearchForm.css";
 
-function SearchForm({ searchRequest, changeToggle, toggle }) {
+function SearchForm({ searchRequest, changeToggle, toggle, value }) {
   const [searchValue, setSearchValue] = useState("");
   const [checkbox, setCheckbox] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    changeToggle(checkbox);
-    const savedValue = localStorage.getItem("search");
-    const savedToggle = localStorage.getItem("toggle");
-
-    if (savedValue) {
-      setSearchValue(savedValue);
-    }
-    if (savedToggle) {
-      if (savedToggle === "true") {
-        setCheckbox(true);
-      } else {
-        setCheckbox(false);
-      }
-    }
-  }, [changeToggle, checkbox]);
+    console.log("form mount");
+    setCheckbox(toggle);
+    setSearchValue(value);
+  }, [toggle, value]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    // saveRequest(searchValue);
-    // saveToggle(checkbox);
+
     searchRequest({ value: searchValue, shortMetre: checkbox });
-  }
-
-  function saveRequest(val) {
-    localStorage.setItem("search", val);
-  }
-
-  function saveToggle(val) {
-    localStorage.setItem("toggle", val);
   }
 
   return (
@@ -56,7 +36,6 @@ function SearchForm({ searchRequest, changeToggle, toggle }) {
           onChange={(e) => {
             setErrorMessage(e.target.validationMessage);
             setSearchValue(e.target.value);
-            saveRequest(e.target.value);
           }}
         />
         <input type="submit" className="search__btn button" value="" />
@@ -71,7 +50,7 @@ function SearchForm({ searchRequest, changeToggle, toggle }) {
           checked={checkbox}
           onChange={(e) => {
             setCheckbox(e.target.checked);
-            saveToggle(e.target.checked);
+            changeToggle(e.target.checked);
           }}
         />
         <div className="checkbox__castom"></div>
