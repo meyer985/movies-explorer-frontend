@@ -7,7 +7,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import Main from "../Main/Main";
 import Preloader from "../Preloader/Preloader";
 import context from "../../context/context";
-import { textSearch, timeSearch } from "../../utils/searchFilms";
+import { timeSearch } from "../../utils/searchFilms";
 
 function Movies({
   getMovies,
@@ -28,6 +28,7 @@ function Movies({
     // console.log("render movie, load last search");
     const savedResult = JSON.parse(localStorage.getItem("searchResult"));
     if (savedResult) {
+      console.log("загружается из хранилища");
       loadSaved(savedResult);
     }
 
@@ -108,7 +109,10 @@ function Movies({
             handleLike={handleLike}
           />
         )}
-        {data.length > increment && <AddBtn addMovies={addMovies} />}
+        {((!searchCheckbox && data.length > increment) ||
+          (searchCheckbox && timeSearch(data).length > increment)) && (
+          <AddBtn addMovies={addMovies} />
+        )}
       </Main>
       <Footer />
     </>

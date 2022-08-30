@@ -12,11 +12,8 @@ function Footer(props) {
         <p
           className="footer__date"
           onClick={() => {
-            localStorage.removeItem("searchResult");
-            localStorage.removeItem("search");
-            localStorage.removeItem("toggle");
-            localStorage.removeItem("token");
-            localStorage.removeItem("movies");
+            localStorage.clear();
+
             console.log("removed");
           }}
         >

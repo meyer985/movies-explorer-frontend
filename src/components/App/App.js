@@ -14,6 +14,7 @@ import getMovies from "../../utils/sideApi";
 import { textSearch, timeSearch } from "../../utils/searchFilms";
 
 function App() {
+  console.log("render app");
   const navigation = useNavigate();
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -194,8 +195,10 @@ function App() {
     if (state === undefined) {
       deliteCard(key);
     } else if (state) {
+      console.log(state, key);
       removeLike(key);
     } else {
+      console.log(movies.filter((it) => it.id === key));
       putLike(key);
     }
   }
