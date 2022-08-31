@@ -29,9 +29,6 @@ function SavedMovies({ data, handleLike, isLoading, isError, errorMessage }) {
   }, []);
 
   function handleSearch(req) {
-    console.log(data);
-    console.log(req.value);
-    console.log(textSearch(data, req.value));
     setSearchValue(req.value);
     setSearchCheckbox(req.shortMetre);
     setMyMovies(textSearch(data, req.value));

@@ -16,7 +16,6 @@ function Movies({
   data,
   handleLike,
   loadSaved,
-  toggle,
   isError,
   errorMessage,
 }) {

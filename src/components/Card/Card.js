@@ -11,9 +11,9 @@ function Card({
   handleLike,
   id,
 }) {
-  function changeLike() {
-    isSaved ? handleLike(id, isLiked) : handleLike(id, isLiked);
-  }
+  // function changeLike() {
+  //   isSaved ? handleLike(id, isLiked) : handleLike(id, isLiked);
+  // }
 
   const getDuration = (duration) => {
     return duration < 61
@@ -38,7 +38,7 @@ function Card({
       <div className="card__capture">
         <p className="card__name">{name} </p>
         <button
-          onClick={changeLike}
+          onClick={() => handleLike(id, isLiked)}
           type="button"
           className={
             isSaved

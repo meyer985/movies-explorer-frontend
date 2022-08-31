@@ -12,7 +12,6 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import api from "../../utils/myApi";
 import getMovies from "../../utils/sideApi";
 import { textSearch } from "../../utils/searchFilms";
-import Error from "../Error/Error";
 
 function App() {
   const navigation = useNavigate();
@@ -22,9 +21,15 @@ function App() {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [success, setSuccess] = useState(false);
+  const [movies, setMovies] = useState([]);
+  const [isLoading, setisLoading] = useState(false);
+  const [myMovies, setMyMovies] = useState([]);
+  const [movieError, setMovieError] = useState(false);
+  const [movieErrorMessage, setMovieErrorMessage] = useState(false);
 
-  function logIn() {
+  function logIn(data) {
     setIsLoggedIn(true);
+    setUser(data);
   }
 
   function logOut() {
@@ -63,8 +68,7 @@ function App() {
       return api
         .auth()
         .then((res) => {
-          setUser(res.data);
-          setIsLoggedIn(true);
+          logIn(res.data);
         })
         .catch((err) => {
           showError(err);
@@ -122,13 +126,7 @@ function App() {
       .catch((err) => showError(err));
   }
 
-  /*загрузка списка фильмов*/
-
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setisLoading] = useState(false);
-  const [myMovies, setMyMovies] = useState([]);
-  const [movieError, setMovieError] = useState(false);
-  const [movieErrorMessage, setMovieErrorMessage] = useState(false);
+  /***********ФИЛЬМЫ************/
 
   function showMovieError(msg) {
     setMovieError(true);
@@ -153,10 +151,12 @@ function App() {
   async function loadMovies() {
     let moviesList = JSON.parse(localStorage.getItem("movies"));
     if (!moviesList) {
+      console.log("пытается загрузить с сервера");
       let load;
       try {
         load = await getMovies();
         moviesList = load;
+        localStorage.setItem("movies", JSON.stringify(load));
       } catch (e) {
         console.log(e);
         showMovieError(
@@ -172,11 +172,17 @@ function App() {
   async function showMovies(req) {
     setisLoading(true);
     const moviesList = await loadMovies();
-    const sortedByName = textSearch(moviesList, req.value);
-    const likedUnlikedList = arrangeMovies(sortedByName);
-    setMovies(likedUnlikedList);
-    saveResult(sortedByName);
-    setisLoading(false);
+    if (moviesList) {
+      const sortedByName = textSearch(moviesList, req.value);
+      const likedUnlikedList = arrangeMovies(sortedByName);
+      setMovies(likedUnlikedList);
+      saveResult(sortedByName);
+      setisLoading(false);
+    } else {
+      showMovieError(
+        "Ошибка при загрузке фильмов, пожалуйста попробуйте позже"
+      );
+    }
   }
 
   function arrangeMovies(list) {
@@ -191,7 +197,7 @@ function App() {
     return selectMyLikes;
   }
 
-  /*-----------ЛАЙК------------*/
+  /*-----------Загрузка сохраненных фильмов------------*/
 
   useEffect(() => {
     setisLoading(true);
@@ -212,6 +218,8 @@ function App() {
       })
       .finally(() => setisLoading(false));
   }, []);
+
+  /*-----------ЛАЙК------------*/
 
   function toggleLike(key, state) {
     if (state === undefined) {
@@ -285,8 +293,6 @@ function App() {
         showMovieError("Ошибка сервера, пожалуйста попробуйте позже");
       });
   }
-
-  /********************** */
 
   return (
     <context.Provider
