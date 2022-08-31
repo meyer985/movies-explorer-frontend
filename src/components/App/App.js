@@ -153,12 +153,20 @@ function App() {
   async function loadMovies() {
     let moviesList = JSON.parse(localStorage.getItem("movies"));
     if (!moviesList) {
-      const load = await getMovies();
-      localStorage.setItem("movies", JSON.stringify(load));
-      moviesList = load;
+      let load;
+      try {
+        load = await getMovies();
+        moviesList = load;
+      } catch (e) {
+        console.log(e);
+        showMovieError(
+          "Ошибка при загрузке фильмов, пожалуйста попробуйте позже"
+        );
+        setisLoading(false);
+        return;
+      }
     }
-    const updatedList = moviesList;
-    return updatedList;
+    return moviesList;
   }
 
   async function showMovies(req) {

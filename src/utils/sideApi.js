@@ -1,6 +1,6 @@
 function getMovies() {
   return fetch("https://api.nomoreparties.co/beatfilm-movies")
-    .then((res) => res.json())
+    .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
     .then((data) => data);
 }
 
