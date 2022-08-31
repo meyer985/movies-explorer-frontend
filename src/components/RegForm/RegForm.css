@@ -34,6 +34,11 @@
   font-weight: 500;
 }
 
+.reg-form__success {
+  color: #378805;
+  font-weight: 500;
+}
+
 .reg-form__link {
   color: #4285f4;
   margin: 0;

@@ -28,6 +28,8 @@ function Profile(props) {
   function handleSubmit(e) {
     e.preventDefault();
     props.update({ name, email });
+    setName(user.name);
+    setEmail(user.email);
   }
 
   return (
@@ -119,11 +121,15 @@ function Profile(props) {
             </button>
           </>
         )}
-        {props.isError && (
+        {props.isError ? (
           <p className="reg-form__caption reg-form__error">
             {props.errorMessage}
           </p>
-        )}
+        ) : props.isSuccess ? (
+          <p className="reg-form__caption reg-form__success">
+            Данные обновлены!
+          </p>
+        ) : null}
       </main>
     </>
   );

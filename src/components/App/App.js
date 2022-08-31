@@ -378,7 +378,6 @@ function App() {
 
           <Route path="*" element={<NotFound history={navigation} />} />
         </Routes>
-        {/* {error && <Error message={errorMessage} />} */}
       </>
     </context.Provider>
   );
