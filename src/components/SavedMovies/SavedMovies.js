@@ -5,8 +5,9 @@ import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import Main from "../Main/Main";
 import { textSearch, timeSearch } from "../../utils/searchFilms";
+import Preloader from "../Preloader/Preloader";
 
-function SavedMovies({ data, handleLike }) {
+function SavedMovies({ data, handleLike, isLoading }) {
   const [myMovies, setMyMovies] = useState(data);
   const [searchValue, setSearchValue] = useState("");
   const [searchCheckbox, setSearchCheckbox] = useState(false);
@@ -54,11 +55,15 @@ function SavedMovies({ data, handleLike }) {
           changeToggle={(state) => setSearchCheckbox(state)}
           sendUpInput={(input) => setSearchValue(input)}
         />
-        <Cards
-          data={!searchCheckbox ? myMovies : timeSearch(myMovies)}
-          isSaved={true}
-          handleLike={handleLike}
-        />
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <Cards
+            data={!searchCheckbox ? myMovies : timeSearch(myMovies)}
+            isSaved={true}
+            handleLike={handleLike}
+          />
+        )}
       </Main>
       <Footer />
     </>

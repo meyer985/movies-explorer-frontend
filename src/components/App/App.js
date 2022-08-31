@@ -175,6 +175,7 @@ function App() {
   /*-----------ЛАЙК------------*/
 
   useEffect(() => {
+    setisLoading(true);
     api
       .getSavedMovies()
       .then((res) => {
@@ -186,7 +187,9 @@ function App() {
         if (data) {
           setMyMovies(data.data);
         }
-      });
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setisLoading(false));
   }, []);
 
   function toggleLike(key, state) {
@@ -285,7 +288,11 @@ function App() {
             path="saved-movies"
             element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
-                <SavedMovies data={myMovies} handleLike={toggleLike} />
+                <SavedMovies
+                  data={myMovies}
+                  handleLike={toggleLike}
+                  isLoading={isLoading}
+                />
               </ProtectedRoute>
             }
           />
