@@ -189,17 +189,19 @@ function App() {
     setisLoading(true);
     api
       .getSavedMovies()
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
       .then((data) => {
         if (data) {
           setMyMovies(data.data);
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err);
+        if (err.status !== 404) {
+          showMovieError(
+            "Ошибка при загрузке фильмов, пожалуйста попробуйте позже"
+          );
+        }
+      })
       .finally(() => setisLoading(false));
   }, []);
 

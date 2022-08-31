@@ -75,7 +75,7 @@ class MyApi {
         "content-type": "application/json",
         authorization: `Bearer ${this._getJWT()}`,
       },
-    });
+    }).then((res) => (res.ok ? res.json() : Promise.reject(res)));
   }
 
   postMovie(data) {
