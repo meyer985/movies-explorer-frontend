@@ -1,0 +1,146 @@
+.student {
+  padding: 112px 70px 0;
+}
+
+.student__page {
+  padding-top: 66px;
+  display: grid;
+  grid-template-columns: minmax(600px, 1fr) 1fr;
+  grid-template-areas: "info image";
+}
+
+.student__content {
+  grid-area: info;
+}
+
+.student__name {
+  font-size: 50px;
+  line-height: 1.16;
+  margin: 0;
+  letter-spacing: -0.04em;
+  padding-bottom: 18px;
+}
+
+.student__brief {
+  font-size: 18px;
+  line-height: 1.1;
+  margin: 0;
+  padding-bottom: 26px;
+}
+
+.student__info {
+  font-size: 14px;
+  line-height: 1.57;
+  margin: 0;
+  padding-bottom: 99px;
+}
+
+.student__links {
+  align-self: flex-end;
+}
+
+.student__link {
+  text-decoration: none;
+  margin-right: 20px;
+  color: white;
+  font-size: 14px;
+}
+
+.student__image {
+  justify-self: end;
+  max-width: 270px;
+}
+
+@media screen and (max-width: 1024px) {
+  .student {
+    padding: 90px 50px 0;
+  }
+
+  .student__page {
+    grid-template-columns: minmax(364px, 1fr) 1fr;
+    column-gap: 49px;
+  }
+
+  .student__name {
+    font-size: 40px;
+    line-height: 1;
+  }
+
+  .student__brief {
+    font-size: 12px;
+    line-height: 1.5;
+    padding-bottom: 20px;
+  }
+
+  .student__info {
+    font-size: 12px;
+    line-height: 1.5;
+    padding-bottom: 87px;
+  }
+
+  .student__links {
+    grid-area: links;
+    align-self: flex-end;
+  }
+
+  .student__link {
+    text-decoration: none;
+    margin-right: 20px;
+    color: white;
+    font-size: 14px;
+  }
+
+  .student__image {
+    max-width: 255px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .student {
+    padding: 63px 14px 69px;
+  }
+
+  .student__page {
+    padding-top: 61px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .student__image {
+    max-width: fit-content;
+  }
+
+  .student__content {
+    margin-top: 40px;
+  }
+
+  .student__name {
+    padding-top: 0px;
+    padding-bottom: 25px;
+    font-size: 30px;
+  }
+
+  .student__brief {
+    font-size: 11px;
+    line-height: 1.45;
+    padding-bottom: 20px;
+  }
+
+  .student__info {
+    padding-bottom: 40px;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .student__link {
+    margin-right: 26px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .student__image {
+    max-width: none;
+    width: 100%;
+  }
+}

@@ -1,0 +1,24 @@
+.add-btn {
+  padding: 50px 70px 80px;
+}
+
+.add-btn__button {
+  background-color: #2f2f2f;
+  color: white;
+  border-radius: 6px;
+  height: 36px;
+  min-width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  .add-btn {
+    padding: 50px 30px 80px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .add-btn {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

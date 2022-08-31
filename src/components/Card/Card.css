@@ -1,0 +1,96 @@
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card__image {
+  justify-self: center;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card__link {
+  height: 151px;
+}
+
+.card__capture {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 50px;
+  border-bottom: 1px solid #424242;
+}
+
+.card__name {
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 500;
+  margin: 0;
+  padding-top: 4px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  max-width: calc(100% - 44px);
+}
+
+.card__button {
+  padding: 0;
+  margin-left: 20px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #313131;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+}
+.card__button_type_like {
+  background-image: url("../../images/grey-heart.svg");
+}
+
+.card__button_type_liked {
+  background-image: url("../../images/heart-red.svg");
+}
+
+.card__button_type_remove {
+  display: none;
+  background-image: url("../../images/cross_icon.svg");
+}
+
+.card:hover .card__button_type_remove {
+  display: block;
+}
+
+.card__time {
+  color: #8b8b8b;
+  font-size: 11px;
+  line-height: 1.2;
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 800px) {
+  .card__link {
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .card__link {
+    height: 168px;
+  }
+
+  .card__name {
+    font-size: 12px;
+    padding-top: 5px;
+  }
+
+  .card__time {
+    color: #8b8b8b;
+    font-size: 10px;
+  }
+}
