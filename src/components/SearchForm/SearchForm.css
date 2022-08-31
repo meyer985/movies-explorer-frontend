@@ -62,11 +62,6 @@
   background-repeat: no-repeat;
 }
 
-.search__container:invalid .search__btn {
-  background-color: #a0a0a0;
-  pointer-events: none;
-}
-
 .checkbox {
   grid-column-start: 2;
   justify-self: center;

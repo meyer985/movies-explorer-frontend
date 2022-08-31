@@ -9,9 +9,15 @@ function SearchForm({
   sendUpInput,
 }) {
   const [errorMessage, setErrorMessage] = useState("");
+  const [emptyField, setEmptyField] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!value) {
+      setEmptyField(true);
+      setTimeout(() => setEmptyField(false), 3000);
+      return;
+    }
     searchRequest({ value: value, shortMetre: toggle });
   }
 
@@ -27,7 +33,7 @@ function SearchForm({
         <input
           type="text"
           className="search__input input"
-          placeholder="Фильм"
+          placeholder={emptyField ? "Введите слово для поиска" : "Фильм"}
           required
           value={value}
           onChange={(e) => {
