@@ -8,8 +8,18 @@ import Main from "../Main/Main";
 import Preloader from "../Preloader/Preloader";
 import context from "../../context/context";
 import { timeSearch } from "../../utils/searchFilms";
+import Error from "../Error/Error";
 
-function Movies({ getMovies, isLoading, data, handleLike, loadSaved, toggle }) {
+function Movies({
+  getMovies,
+  isLoading,
+  data,
+  handleLike,
+  loadSaved,
+  toggle,
+  isError,
+  errorMessage,
+}) {
   const windowSize = useContext(context).size;
   const [increment, setIncrement] = useState(getIncrement);
   const [searchValue, setSearchValue] = useState("");
@@ -99,6 +109,7 @@ function Movies({ getMovies, isLoading, data, handleLike, loadSaved, toggle }) {
           (searchCheckbox && timeSearch(data).length > increment)) && (
           <AddBtn addMovies={addMovies} />
         )}
+        {isError && <Error message={errorMessage} />}
       </Main>
       <Footer />
     </>

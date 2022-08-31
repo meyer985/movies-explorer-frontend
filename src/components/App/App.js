@@ -127,6 +127,17 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setisLoading] = useState(false);
   const [myMovies, setMyMovies] = useState([]);
+  const [movieError, setMovieError] = useState(false);
+  const [movieErrorMessage, setMovieErrorMessage] = useState(false);
+
+  function showMovieError(msg) {
+    setMovieError(true);
+    setMovieErrorMessage(msg);
+    setTimeout(() => {
+      setMovieError(false);
+      setMovieErrorMessage("");
+    }, 3000);
+  }
 
   //* подгружаем сохраненный результат из локал стораджа*//
 
@@ -196,10 +207,8 @@ function App() {
     if (state === undefined) {
       deliteCard(key);
     } else if (state) {
-      console.log(state, key);
       removeLike(key);
     } else {
-      console.log(movies.filter((it) => it.id === key));
       putLike(key);
     }
   }
@@ -207,7 +216,6 @@ function App() {
   function deliteCard(id) {
     api
       .deleteMovie(id)
-      .then((res) => res.json())
       .then((data) => {
         const updatedList = movies.map((item) => {
           if (item.id === data.data.movieId) {
@@ -220,13 +228,15 @@ function App() {
 
         setMyMovies(myMovies.filter((item) => item._id !== data.data._id));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        showMovieError("Ошибка сервера, пожалуйста попробуйте позже");
+      });
   }
 
   function removeLike(id) {
     api
       .deleteMovie(myMovies.find((item) => item.movieId === id)._id)
-      .then((res) => res.json())
       .then((data) => {
         setMyMovies(myMovies.filter((item) => item._id !== data.data._id));
         const updatedList = movies.map((item) => {
@@ -238,13 +248,15 @@ function App() {
         setMovies(updatedList);
         saveResult(updatedList);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        showMovieError("Ошибка сервера, пожалуйста попробуйте позже");
+      });
   }
 
   function putLike(id) {
     api
       .postMovie(movies.find((item) => item.id === id))
-      .then((res) => res.json())
       .then((data) => {
         setMyMovies(myMovies.concat(data.data));
       })
@@ -258,7 +270,10 @@ function App() {
         setMovies(updatedList);
         saveResult(updatedList);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        showMovieError("Ошибка сервера, пожалуйста попробуйте позже");
+      });
   }
 
   /********************** */
@@ -280,6 +295,8 @@ function App() {
                   data={movies}
                   handleLike={toggleLike}
                   loadSaved={loadSavedSearch}
+                  isError={movieError}
+                  errorMessage={movieErrorMessage}
                 />
               </ProtectedRoute>
             }
@@ -292,6 +309,8 @@ function App() {
                   data={myMovies}
                   handleLike={toggleLike}
                   isLoading={isLoading}
+                  isError={movieError}
+                  errorMessage={movieErrorMessage}
                 />
               </ProtectedRoute>
             }

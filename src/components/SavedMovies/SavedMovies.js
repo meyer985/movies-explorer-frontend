@@ -6,8 +6,9 @@ import SearchForm from "../SearchForm/SearchForm";
 import Main from "../Main/Main";
 import { textSearch, timeSearch } from "../../utils/searchFilms";
 import Preloader from "../Preloader/Preloader";
+import Error from "../Error/Error";
 
-function SavedMovies({ data, handleLike, isLoading }) {
+function SavedMovies({ data, handleLike, isLoading, isError, errorMessage }) {
   const [myMovies, setMyMovies] = useState(data);
   const [searchValue, setSearchValue] = useState("");
   const [searchCheckbox, setSearchCheckbox] = useState(false);
@@ -15,7 +16,6 @@ function SavedMovies({ data, handleLike, isLoading }) {
   /*загрузка сохраненных результатов поиска*/
 
   useEffect(() => {
-    console.log("начальная загрузка");
     setMyMovies(data);
   }, [data]);
 
@@ -64,6 +64,7 @@ function SavedMovies({ data, handleLike, isLoading }) {
             handleLike={handleLike}
           />
         )}
+        {isError && <Error message={errorMessage} />}
       </Main>
       <Footer />
     </>

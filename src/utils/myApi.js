@@ -98,7 +98,13 @@ class MyApi {
         nameRU: data.nameRU,
         nameEN: data.nameEN,
       }),
-    });
+    }).then((res) =>
+      res.ok
+        ? res.json()
+        : res.text().then((text) => {
+            throw new Error(text);
+          })
+    );
   }
 
   deleteMovie(data) {
@@ -108,7 +114,13 @@ class MyApi {
         "content-type": "application/json",
         authorization: `Bearer ${this._getJWT()}`,
       },
-    });
+    }).then((res) =>
+      res.ok
+        ? res.json()
+        : res.text().then((text) => {
+            throw new Error(text);
+          })
+    );
   }
 
   _getJWT() {
