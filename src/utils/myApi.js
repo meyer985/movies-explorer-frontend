@@ -130,7 +130,9 @@ class MyApi {
 }
 
 const api = new MyApi({
-  BASE_URL: "http://localhost:3001",
+  BASE_URL: `${window.location.protocol}${
+    process.env.REACT_APP_API_ENDPOINT || "//localhost:3001"
+  }`,
   headers: { "content-type": "application/json" },
 });
 
