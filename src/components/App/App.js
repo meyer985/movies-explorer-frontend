@@ -71,7 +71,7 @@ function App() {
           logIn(res.data);
         })
         .catch((err) => {
-          showError(err);
+          console.log(err);
           setIsLoggedIn(false);
         });
     }
