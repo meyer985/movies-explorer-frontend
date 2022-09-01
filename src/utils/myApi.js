@@ -130,9 +130,7 @@ class MyApi {
 }
 
 const api = new MyApi({
-  BASE_URL: `${window.location.protocol}${
-    process.env.REACT_APP_API_ENDPOINT || "//localhost:3001"
-  }`,
+  BASE_URL: `${window.location.protocol}//api.meyer985diplom.nomoredomains.xyz`,
   headers: { "content-type": "application/json" },
 });
 

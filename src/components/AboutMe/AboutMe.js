@@ -1,6 +1,6 @@
 import React from "react";
 import "./AboutMe.css";
-import pic__COLOR_pic from "../../images/pic__COLOR_pic-min.svg";
+import new_photo from "../../images/new_photo.JPG";
 
 function AboutMe(props) {
   return (
@@ -9,16 +9,16 @@ function AboutMe(props) {
         <h3 className="section__header">Студент</h3>
       </div>
       <article className="student__page">
-        <img className="student__image" src={pic__COLOR_pic} alt="фото" />
+        <img className="student__image" src={new_photo} alt="фото" />
         <div className="student__content">
           <p className="student__name">Алексей</p>
           <p className="student__brief">Фронтенд-разработчик, 38 лет</p>
           <p className="student__info">
-            Я родился и живу в Саратове, закончил факультет экономики СГУ. У
-            меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь
-            бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ
-            Контур». После того, как прошёл курс по веб-разработке, начал
-            заниматься фриланс-заказами и ушёл с постоянной работы.
+            Я родился и живу в Санкт-Петербурге, на протяжении семи последних
+            лет работал в компании, которая занимается логистикой и
+            международной торговлей. Давно интересовался IT и в 2021 году начал
+            учиться на курсах веб-разработки. Параллельно с учебой занимался
+            собственными проектами, изучал дополнительные технологии.
           </p>
 
           <span className="student__links">
