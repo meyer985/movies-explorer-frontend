@@ -9,6 +9,15 @@ import Preloader from "../Preloader/Preloader";
 import context from "../../context/context";
 import { timeSearch } from "../../utils/searchFilms";
 import Error from "../Error/Error";
+import config from "../../utils/constants";
+const {
+  BREAK_DESCTOP,
+  BREAK_PAD,
+  BREAK_MOBILE,
+  FEED_MORE_DESCTOP,
+  FEED_MORE_PAD,
+  FEED_MORE_MOBILE,
+} = config;
 
 function Movies({
   getMovies,
@@ -39,11 +48,11 @@ function Movies({
   }, []);
 
   function getIncrement() {
-    if (windowSize > 1124) {
+    if (windowSize >= BREAK_DESCTOP) {
       return 16;
-    } else if (windowSize > 800 && windowSize < 1125) {
+    } else if (windowSize >= BREAK_PAD && windowSize < BREAK_DESCTOP) {
       return 12;
-    } else if (windowSize > 500 && windowSize < 801) {
+    } else if (windowSize > BREAK_MOBILE && windowSize < BREAK_PAD) {
       return 8;
     } else {
       return 5;
@@ -51,12 +60,12 @@ function Movies({
   }
 
   function changeIncrement() {
-    if (windowSize > 1124) {
-      setIncrement(increment + 4);
-    } else if (windowSize > 800 && windowSize < 1125) {
-      setIncrement(increment + 3);
+    if (windowSize >= BREAK_DESCTOP) {
+      setIncrement(increment + FEED_MORE_DESCTOP);
+    } else if (windowSize > BREAK_PAD && windowSize < BREAK_DESCTOP) {
+      setIncrement(increment + FEED_MORE_PAD);
     } else {
-      setIncrement(increment + 2);
+      setIncrement(increment + FEED_MORE_MOBILE);
     }
   }
 

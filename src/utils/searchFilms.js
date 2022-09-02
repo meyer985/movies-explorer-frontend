@@ -1,3 +1,5 @@
+import config from "./constants";
+
 export function textSearch(data, key) {
   return data.filter((film) => {
     // const string =
@@ -8,5 +10,5 @@ export function textSearch(data, key) {
 }
 
 export function timeSearch(data, key) {
-  return data.filter((film) => film.duration < 41);
+  return data.filter((film) => film.duration < config.SHORT_FILM);
 }

@@ -17,7 +17,7 @@ function Cards({ data, isLiked, handleLike }) {
                 isSaved={Boolean(film._id)}
                 isLiked={film.isLiked}
                 link={film.trailerLink}
-                key={index}
+                key={film.duration * Math.random()}
                 handleLike={handleLike}
               />
             );

@@ -1,5 +1,6 @@
+import config from "./constants";
 function getMovies() {
-  return fetch("https://api.nomoreparties.co/beatfilm-movies")
+  return fetch(config.SIDE_API_URL)
     .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
     .then((data) => data);
 }

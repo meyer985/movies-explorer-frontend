@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../../images/logo.svg";
 import context from "../../context/context";

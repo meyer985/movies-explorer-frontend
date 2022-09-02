@@ -1,3 +1,5 @@
+import config from "./constants";
+
 class MyApi {
   constructor(props) {
     const { BASE_URL, headers } = props;
@@ -130,9 +132,8 @@ class MyApi {
 }
 
 const api = new MyApi({
-  BASE_URL: `${window.location.protocol}//localhost:3001`,
+  BASE_URL: `${window.location.protocol}${config.MY_API_URL}`,
   headers: { "content-type": "application/json" },
 });
 
 export default api;
-// api.meyer985diplom.nomoredomains.xyz

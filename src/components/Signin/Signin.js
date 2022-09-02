@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import RegForm from "../RegForm/RegForm";
 import InputBlock from "../InputBlock/InputBlock";
 import RegisterHeader from "../RegisterHeader/RegisterHeader";
