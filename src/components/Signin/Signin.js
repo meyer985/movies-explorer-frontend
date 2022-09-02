@@ -32,12 +32,12 @@ function Signin({ signin, isError, errorMessage }) {
         errorMessage={errorMessage}
       >
         <InputBlock
-          type={"email"}
           placeholder={"pochta@ya.ru"}
           label={"E-mail"}
           getValue={getInputValue}
           name="email"
           value={emailValue}
+          pattern={"\\w+@\\w+.\\w+"}
         />
         <InputBlock
           type={"password"}

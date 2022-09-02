@@ -40,19 +40,18 @@ function Signup({ signup, isError, errorMessage }) {
           name="name"
           placeholder="Алексей"
           label="Имя"
-          // pattern="[A-Za-zА-Яа-яЁё-]"
           min="2"
           max="30"
           getValue={getInputValue}
           value={nameValue}
         />
         <InputBlock
-          type={"email"}
           placeholder={"pochta@ya.ru"}
           label={"E-mail"}
           getValue={getInputValue}
           name="email"
           value={emailValue}
+          pattern={"\\w+@\\w+.\\w+"}
         />
         <InputBlock
           type={"password"}

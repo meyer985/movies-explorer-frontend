@@ -130,8 +130,9 @@ class MyApi {
 }
 
 const api = new MyApi({
-  BASE_URL: `${window.location.protocol}//api.meyer985diplom.nomoredomains.xyz`,
+  BASE_URL: `${window.location.protocol}//localhost:3001`,
   headers: { "content-type": "application/json" },
 });
 
 export default api;
+// api.meyer985diplom.nomoredomains.xyz
