@@ -7,15 +7,17 @@ function Signin({ signin, isError, errorMessage }) {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
 
-  function getInputValue(name, value) {
+  function getInputValue(name, value, clearInputs) {
     name === "password" ? setPasswordValue(value) : setEmailValue(value);
+  }
+
+  function clearInputs() {
+    setEmailValue("");
+    setPasswordValue("");
   }
 
   function handleSubmit() {
     signin({ email: emailValue, password: passwordValue });
-
-    setEmailValue("");
-    setPasswordValue("");
   }
 
   return (

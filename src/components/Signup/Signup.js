@@ -18,10 +18,6 @@ function Signup({ signup, isError, errorMessage }) {
 
   function handleSubmit() {
     signup({ email: emailValue, password: passwordValue, name: nameValue });
-
-    setEmailValue("");
-    setPasswordValue("");
-    setNameValue("");
   }
   return (
     <>

@@ -28,8 +28,6 @@ function Profile(props) {
   function handleSubmit(e) {
     e.preventDefault();
     props.update({ name, email });
-    setName(user.name);
-    setEmail(user.email);
   }
 
   return (
@@ -67,7 +65,7 @@ function Profile(props) {
           <label className="edit__label">E-mail</label>
           <input
             required
-            pattern="\\w+@\\w+.\\w+"
+            pattern="\w+@\w+.\w+"
             name="email"
             className="edit__input input"
             value={email}
@@ -96,7 +94,11 @@ function Profile(props) {
             />
 
             <button
-              onClick={() => setIsUpdating(!isUpdating)}
+              onClick={() => {
+                setIsUpdating(!isUpdating);
+                setName(user.name);
+                setEmail(user.email);
+              }}
               type="button"
               className="profile__button profile__button_type_checkout button"
             >
