@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Card.css";
+import context from "../../context/context";
 
 function Card({
   image,
@@ -11,9 +12,7 @@ function Card({
   handleLike,
   id,
 }) {
-  // function changeLike() {
-  //   isSaved ? handleLike(id, isLiked) : handleLike(id, isLiked);
-  // }
+  const windowSize = useContext(context).size;
 
   const getDuration = (duration) => {
     return duration < 61
@@ -42,7 +41,11 @@ function Card({
           type="button"
           className={
             isSaved
-              ? `card__button card__button_type_remove button`
+              ? `card__button  button ${
+                  windowSize > 800
+                    ? "card__button_type_remove"
+                    : "card__button_type_mobile"
+                }`
               : isLiked
               ? `card__button card__button_type_liked button`
               : `card__button card__button_type_like button`

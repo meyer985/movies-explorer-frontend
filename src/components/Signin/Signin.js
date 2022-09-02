@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RegForm from "../RegForm/RegForm";
 import InputBlock from "../InputBlock/InputBlock";
 import RegisterHeader from "../RegisterHeader/RegisterHeader";
@@ -9,11 +9,6 @@ function Signin({ signin, isError, errorMessage }) {
 
   function getInputValue(name, value, clearInputs) {
     name === "password" ? setPasswordValue(value) : setEmailValue(value);
-  }
-
-  function clearInputs() {
-    setEmailValue("");
-    setPasswordValue("");
   }
 
   function handleSubmit() {

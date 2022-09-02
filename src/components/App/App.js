@@ -151,7 +151,6 @@ function App() {
   async function loadMovies() {
     let moviesList = JSON.parse(localStorage.getItem("movies"));
     if (!moviesList) {
-      console.log("пытается загрузить с сервера");
       let load;
       try {
         load = await getMovies();

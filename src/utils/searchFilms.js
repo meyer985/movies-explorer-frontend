@@ -1,7 +1,8 @@
 export function textSearch(data, key) {
   return data.filter((film) => {
-    const string =
-      `${film.nameRU}${film.nameEN}${film.director}${film.country}${film.year}${film.description}`.toLowerCase();
+    // const string =
+    //   `${film.nameRU}${film.nameEN}${film.director}${film.country}${film.year}${film.description}`.toLowerCase();
+    const string = `${film.nameRU}${film.nameEN}`.toLowerCase();
     return string.includes(key.toLowerCase());
   });
 }
