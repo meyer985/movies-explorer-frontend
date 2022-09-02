@@ -65,7 +65,7 @@ function Profile(props) {
           <label className="edit__label">E-mail</label>
           <input
             required
-            pattern="\w+@\w+.\w+"
+            pattern="\w+@\w+\.\w+"
             name="email"
             className="edit__input input"
             value={email}

@@ -34,7 +34,7 @@ function Signin({ signin, isError, errorMessage }) {
           getValue={getInputValue}
           name="email"
           value={emailValue}
-          pattern={"\\w+@\\w+.\\w+"}
+          pattern={"\\w+@\\w+\\.\\w+"}
         />
         <InputBlock
           type={"password"}

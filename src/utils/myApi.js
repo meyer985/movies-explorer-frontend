@@ -132,7 +132,7 @@ class MyApi {
 }
 
 const api = new MyApi({
-  BASE_URL: `${window.location.protocol}${config.MY_API_URL}`,
+  BASE_URL: config.MY_API_URL,
   headers: { "content-type": "application/json" },
 });
 

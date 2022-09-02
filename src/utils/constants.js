@@ -1,6 +1,6 @@
 const config = {
   SHORT_FILM: 40,
-  MY_API_URL: "api.meyer985diplom.nomoredomains.xyz",
+  MY_API_URL: "https://api.meyer985diplom.nomoredomains.xyz",
   SIDE_API_URL: "https://api.nomoreparties.co/beatfilm-movies",
   BREAK_DESCTOP: 1124,
   BREAK_PAD: 800,

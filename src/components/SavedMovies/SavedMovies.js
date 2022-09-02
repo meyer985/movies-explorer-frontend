@@ -24,7 +24,7 @@ function SavedMovies({ data, handleLike, isLoading, isError, errorMessage }) {
     if (lastSearch) {
       setSearchValue(lastSearch.value);
       setSearchCheckbox(lastSearch.position);
-      // setMyMovies(textSearch(data, lastSearch.value));
+      setMyMovies(textSearch(data, lastSearch.value));
     }
   }, []);
 
