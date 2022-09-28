@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import RegForm from "../RegForm/RegForm";
 import InputBlock from "../InputBlock/InputBlock";
 import RegisterHeader from "../RegisterHeader/RegisterHeader";
 
-function Signin(props) {
+function Signin({ signin, isError, errorMessage }) {
+  const [emailValue, setEmailValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
+
+  function getInputValue(name, value, clearInputs) {
+    name === "password" ? setPasswordValue(value) : setEmailValue(value);
+  }
+
+  function handleSubmit() {
+    signin({ email: emailValue, password: passwordValue });
+  }
+
   return (
     <>
       <RegisterHeader greeting={"Рады видеть!"} />
@@ -13,16 +24,25 @@ function Signin(props) {
         link={"Регистрация"}
         href={"/signup"}
         shortForm={true}
+        formSubmit={handleSubmit}
+        isError={isError}
+        errorMessage={errorMessage}
       >
         <InputBlock
-          type={"email"}
           placeholder={"pochta@ya.ru"}
           label={"E-mail"}
+          getValue={getInputValue}
+          name="email"
+          value={emailValue}
+          pattern={"\\w+@\\w+\\.\\w+"}
         />
         <InputBlock
           type={"password"}
           placeholder={"********"}
           label={"Пароль"}
+          getValue={getInputValue}
+          name="password"
+          value={passwordValue}
         />
       </RegForm>
     </>

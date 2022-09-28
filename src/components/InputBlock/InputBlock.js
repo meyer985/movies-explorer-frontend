@@ -1,16 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import "./InputBlock.css";
 
-function InputBlock(props) {
+function InputBlock({
+  label,
+  type,
+  placeholder,
+  getValue,
+  name,
+  value,
+  pattern,
+  min,
+  max,
+}) {
+  const [errorMessage, setErrorMessage] = useState("");
+
   return (
     <>
-      <label className="input__label">{props.label}</label>
+      <label className="input__label">{label}</label>
       <input
-        type={props.type}
-        placeholder={props.placeholder}
+        name={name}
+        value={value}
+        required
+        type={type}
+        placeholder={placeholder}
         className="input__field input"
+        noValidate
+        pattern={pattern}
+        minLength={min}
+        maxLength={max}
+        onChange={(e) => {
+          setErrorMessage(e.target.validationMessage);
+          getValue(e.target.name, e.target.value);
+        }}
       />
-      <span className="inut__error-message">Что-то пошло не так...</span>
+      <span className="inut__error-message">{errorMessage}</span>
     </>
   );
 }

@@ -1,0 +1,20 @@
+.error {
+  position: fixed;
+  right: 50%;
+  transform: translate(50%, 0);
+  bottom: 10%;
+  max-width: 320px;
+  min-width: 20%;
+  min-height: 10px;
+  background-color: transparent;
+  border-radius: 5px;
+  border: #ee3465 solid 2px;
+}
+
+.error__message {
+  text-align: center;
+  color: #ee3465;
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 500;
+}

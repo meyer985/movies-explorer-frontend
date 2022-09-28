@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import "./Navigation.css";
 
 function Navigation(props) {
@@ -11,19 +11,19 @@ function Navigation(props) {
   };
   return (
     <>
-      <a className={`menu__main${getLocation("/")}`} href="/">
+      <Link className={`menu__main${getLocation("/")}`} to="/">
         Главная
-      </a>
+      </Link>
       <span className="menu__center-block center-block">
-        <a href="/movies" className={getLocation("/movies")}>
+        <Link to="/movies" className={getLocation("/movies")}>
           Фильмы
-        </a>
-        <a href="/saved-movies" className={getLocation("/saved-movies")}>
+        </Link>
+        <Link to="/saved-movies" className={getLocation("/saved-movies")}>
           Сохранённые фильмы
-        </a>
+        </Link>
       </span>
-      <a
-        href="/profile"
+      <Link
+        to="/profile"
         className={
           path === "/profile"
             ? "navigation_account-btn account-btn link account-btn__picked"
@@ -32,7 +32,7 @@ function Navigation(props) {
       >
         <p className="menu__link account-btn__link">Аккаунт</p>
         <div className="account-btn__userpic"></div>
-      </a>
+      </Link>
     </>
   );
 }
